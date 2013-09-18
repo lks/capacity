@@ -1,0 +1,7 @@
+parameters:
+#    lks_user_management.example.class: Lks\UserManagementBundle\Example
+
+services:
+#    lks_user_management.example:
+#        class: %lks_user_management.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

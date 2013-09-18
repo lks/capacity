@@ -1,0 +1,4 @@
+lks_user_management:
+    resource: "@LksUserManagementBundle/Resources/config/routing.yml"
+    prefix:   /
+
