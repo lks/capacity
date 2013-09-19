@@ -1,0 +1,18 @@
+{% extends "LksUserManagementBundle::layout.html.twig" %}
+{% block content %}
+	<table class="table">
+		<thead>
+			<th>First name</th>
+			<th>Last name</th>
+		</thead>
+		<tbody>
+			{% for member in members %}
+				<tr>
+					<td>{{ member.firstname|e }}</td>
+					<td>{{ member.lastname|e }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{{ form(form) }}
+{% endblock %}

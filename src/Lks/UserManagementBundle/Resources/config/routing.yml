@@ -1,4 +1,6 @@
-lks_user_management_homepage:
-    pattern:  /test
-    defaults: { _controller: LksUserManagementBundle:Default:index }
-    
+lum_create_user:
+    pattern:  /create
+    defaults: { _controller: LksUserManagementBundle:Default:create }
+lum_list_users:
+    pattern:  /list
+    defaults: { _controller: LksUserManagementBundle:Default:listAndCreate }
