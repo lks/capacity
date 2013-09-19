@@ -1,3 +1,4 @@
 lks_user_management_homepage:
-    pattern:  /test/{name}
+    pattern:  /test
     defaults: { _controller: LksUserManagementBundle:Default:index }
+    
