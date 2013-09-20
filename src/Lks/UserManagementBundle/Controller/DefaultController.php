@@ -37,7 +37,7 @@ class DefaultController extends Controller
         ));
     }
 
-    public function listAndCreateAction(Request $request)
+    public function membersAction(Request $request)
     {
         //get all user items
         $repository = $this->getDoctrine()
@@ -64,9 +64,9 @@ class DefaultController extends Controller
             $em->flush();
 
             //TODO : Define a route
-            return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members));
+            return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
         }
         // The security layer will intercept this request
-        return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form));
+        return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
     }
 }

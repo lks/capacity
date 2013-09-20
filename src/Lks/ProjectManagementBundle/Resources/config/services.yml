@@ -1,0 +1,7 @@
+parameters:
+#    lks_project_management.example.class: Lks\ProjectManagementBundle\Example
+
+services:
+#    lks_project_management.example:
+#        class: %lks_project_management.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

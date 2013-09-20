@@ -1,0 +1,3 @@
+lks_project_management_homepage:
+    pattern:  /projects
+    defaults: { _controller: LksProjectManagementBundle:Default:projects }
