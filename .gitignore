@@ -189,3 +189,7 @@ app/cache/dev/appDevUrlGenerator.php
 app/cache/dev/appDevUrlMatcher.php
 
 app/cache/dev/appDevUrlMatcher.php
+
+*.sublime-workspace
+
+*.sublime-workspace

@@ -8,26 +8,102 @@
 	"buffers":
 	[
 		{
-			"file": "/D/dev/apache/htdocs/Symfony/src/Lks/UserManagementBundle/Resources/views/layout.html.twig",
+			"file": "app/Resources/views/base.html.twig",
 			"settings":
 			{
-				"buffer_size": 168,
-				"line_ending": "Windows"
+				"buffer_size": 718,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/D/dev/apache/htdocs/Symfony/src/Lks/UserManagementBundle/Resources/public/css/user.css",
+			"file": "src/Lks/UserManagementBundle/Entity/Member.php",
 			"settings":
 			{
-				"buffer_size": 28,
-				"line_ending": "Windows"
+				"buffer_size": 1299,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/D/dev/apache/htdocs/Symfony/src/Acme/DemoBundle/Resources/public/css/demo.css",
+			"file": "src/Lks/UserManagementBundle/Controller/DefaultController.php",
 			"settings":
 			{
-				"buffer_size": 2204,
+				"buffer_size": 2120,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Lks/UserManagementBundle/Resources/views/Default/index.html.twig",
+			"settings":
+			{
+				"buffer_size": 112,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Lks/UserManagementBundle/Resources/config/routing.yml",
+			"settings":
+			{
+				"buffer_size": 222,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Acme/DemoBundle/Controller/DemoController.php",
+			"settings":
+			{
+				"buffer_size": 1507,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Acme/DemoBundle/Controller/WelcomeController.php",
+			"settings":
+			{
+				"buffer_size": 441,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Acme/DemoBundle/Controller/SecuredController.php",
+			"settings":
+			{
+				"buffer_size": 1788,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "_welcome:\n    pattern:  /\n    defaults: { _controller: AcmeDemoBundle:Welcome:index }\n\n\n_demo_secured:\n    resource: \"@AcmeDemoBundle/Controller/SecuredController.php\"\n    type:     annotation\n\n_demo:\n    resource: \"@AcmeDemoBundle/Controller/DemoController.php\"\n    type:     annotation\n    prefix:   /demo",
+			"file": "src/Acme/DemoBundle/Resources/config/routing.yml",
+			"file_size": 306,
+			"file_write_time": 130240957200000000,
+			"settings":
+			{
+				"buffer_size": 307,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Lks/UserManagementBundle/Resources/views/Default/yata.html.twig",
+			"settings":
+			{
+				"buffer_size": 4,
+				"line_ending": "Unix",
+				"name": "TEST"
+			}
+		},
+		{
+			"file": "src/Acme/DemoBundle/Resources/views/Secured/login.html.twig",
+			"settings":
+			{
+				"buffer_size": 1056,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Lks/UserManagementBundle/Resources/views/modules/addUserForm.html.twig",
+			"settings":
+			{
+				"buffer_size": 319,
 				"line_ending": "Unix"
 			}
 		}
@@ -59,40 +135,55 @@
 	},
 	"file_history":
 	[
-		"/D/dev/apache/htdocs/Symfony/src/Acme/DemoBundle/Resources/views/layout.html.twig",
-		"/D/dev/apache/htdocs/Symfony/src/Lks/UserManagementBundle/Resources/config/routing.yml",
-		"/D/dev/apache/conf/httpd.conf",
-		"/C/Users/j.calabrese/Documents/GitHub/favicon.ico",
-		"/D/dev/apache/logs/access.log",
-		"/C/Users/j.calabrese/Documents/GitHub/capacity-planning/.htaccess",
-		"/D/GIT/Meetic/dating/html.v6/brands/meetic/fr/signup/2013/03/05/landing_hpv_new_profile_nmup_cta_rose_chart_form.htm",
-		"/D/GIT/Meetic/dating/html.v6/brands/meetic/fr/signup/2012/12/21/landing_registration_search_profiles.htm",
-		"/D/GIT/Meetic/dating/html.v6/brands/meetic/fr/signup/2013/03/05/landing_hpv_new_profile_nmup_cta_rose_bn.htm",
-		"/D/dev/apache/logs/error.log",
-		"/D/dev/apache/htdocs/templates/assets/css/bootstrap.css",
-		"/D/dev/apache/htdocs/templates/assets/css/main.css",
-		"/D/dev/apache/htdocs/web/index.php",
-		"/D/dev/apache/htdocs/templates/index.html",
-		"/D/dev/apache/htdocs/src/controllers.php",
-		"/D/dev/apache/htdocs/templates/views/nav.html",
-		"/D/dev/apache/htdocs/templates/layout.html",
-		"/D/dev/apache/htdocs/templates/views/sidebar.html",
-		"/D/dev/apache/htdocs/templates/user.html",
-		"/D/dev/apache/htdocs/config/prod.php",
-		"/C/Users/j.calabrese/Documents/GitHub/index.html.txt",
-		"/C/Program Files (x86)/Apache Group/Apache2/conf/httpd.conf",
-		"/C/Windows/System32/drivers/etc/hosts"
+		"/Applications/MAMP/htdocs/capacity/.gitignore",
+		"/Applications/MAMP/htdocs/capacity/src/Acme/DemoBundle/Controller/SecuredController.php",
+		"/Applications/MAMP/htdocs/capacity/app/config/config.yml",
+		"/opt/local/etc/php5/php.ini",
+		"/Applications/MAMP/htdocs/index.php",
+		"/Applications/MAMP/htdocs/capacity/src/Lks/UserManagementBundle/Entity/User.php",
+		"/Applications/MAMP/htdocs/capacity/app/config/parameters.yml",
+		"/Applications/MAMP/htdocs/capacity/app/AppKernel.php",
+		"/Applications/MAMP/htdocs/capacity/src/Lks/UserManagementBundle/Controller/DefaultController.php",
+		"/Applications/MAMP/htdocs/capacity/src/Lks/UserManagementBundle/Resources/config/routing.yml",
+		"/Applications/MAMP/htdocs/capacity/src/Lks/UserManagementBundle/Resources/views/layout.html.twig",
+		"/Applications/MAMP/htdocs/capacity/app/Resources/views/base.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/Default/loginForm.html",
+		"/Applications/MAMP/htdocs/Symfony/src/Acme/DemoBundle/Resources/views/Demo/hello.xml.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/Acme/DemoBundle/Controller/DemoController.php",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/HelloBundle/Controller/DefaultController.php",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/HelloBundle/Resources/config/routing.yml",
+		"/Applications/MAMP/htdocs/Symfony/app/Resources/views/base.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/HelloBundle/Resources/views/Default/index.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/config/routing.yml",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Controller/DefaultController.php",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/Default/userManagement.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/app/config/routing.yml",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/Default/loginUser.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/Default/modules/loginFom.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/Default/createUser.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/UserManagementBundle/Resources/views/createUser.html.twig",
+		"/Applications/MAMP/htdocs/Symfony/src/lks/HelloBundle/Controller/HelloController.php",
+		"/Applications/MAMP/htdocs/capacity-planning/.gitignore",
+		"/Applications/MAMP/htdocs/capacity-planning/composer.json",
+		"/Applications/MAMP/htdocs/capacity-planning/templates/manage_user.html",
+		"/Applications/MAMP/htdocs/capacity-planning/web/bootstrap.php",
+		"/Applications/MAMP/htdocs/silex-poc/.htaccess",
+		"/Applications/MAMP/htdocs/silex-poc/src/controllers.php",
+		"/Applications/MAMP/htdocs/silex-poc/templates/layout.html",
+		"/Applications/MAMP/htdocs/silex-poc/composer.json",
+		"/Applications/MAMP/htdocs/silex-poc/templates/assets/css/bootstrap.css",
+		"/Applications/MAMP/htdocs/Silex-Kitchen-Edition/web/.htaccess"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 46.0
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
-			"D:\\dev\\apache\\htdocs"
 		]
 	},
 	"find_state":
@@ -100,25 +191,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"server",
+			"/**\n",
+			"intl.so",
+			"extension_dir",
+			"intl",
+			"extension_dir",
 			"extension",
-			"openssl",
+			"pdo",
+			"error",
 			"extension",
-			"php",
-			"extension=D:/dev/PHP/ext/php_openssl.dll",
-			"date.timezone",
-			"extension",
-			"openssl",
-			"DocumentR",
-			"	    \n",
-			"app.request.basepath",
-			"mod_rewrite",
-			"index.php",
-			"documentRoot",
-			"mysql",
-			"db",
-			"php",
-			"sql"
+			"Off",
+			"php_posix",
+			"extension"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -136,24 +220,109 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/dev/apache/htdocs/Symfony/src/Lks/UserManagementBundle/Resources/views/layout.html.twig",
+					"file": "app/Resources/views/base.html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 168,
+						"buffer_size": 718,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								168,
+								509,
+								509
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Lks/UserManagementBundle/Entity/Member.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1299,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								357,
+								357
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 5,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Lks/UserManagementBundle/Controller/DefaultController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2120,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
 								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/Lks/UserManagementBundle/Resources/views/Default/index.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								96,
+								96
 							]
 						],
 						"settings":
@@ -167,26 +336,25 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "/D/dev/apache/htdocs/Symfony/src/Lks/UserManagementBundle/Resources/public/css/user.css",
+					"buffer": 4,
+					"file": "src/Lks/UserManagementBundle/Resources/config/routing.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28,
+						"buffer_size": 222,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								25,
-								25
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/YAML/YAML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -195,27 +363,194 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/D/dev/apache/htdocs/Symfony/src/Acme/DemoBundle/Resources/public/css/demo.css",
-					"semi_transient": true,
+					"buffer": 5,
+					"file": "src/Acme/DemoBundle/Controller/DemoController.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2204,
+						"buffer_size": 1507,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								125,
-								0
+								103,
+								46
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/Acme/DemoBundle/Controller/WelcomeController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								103,
+								46
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/Acme/DemoBundle/Controller/SecuredController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1788,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1026,
+								1026
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/Acme/DemoBundle/Resources/config/routing.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								86,
+								86
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/Lks/UserManagementBundle/Resources/views/Default/yata.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4,
+								4
+							]
+						],
+						"settings":
+						{
+							"auto_name": "TEST",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/Acme/DemoBundle/Resources/views/Secured/login.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1056,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/Lks/UserManagementBundle/Resources/views/modules/addUserForm.html.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44,
+								44
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -268,6 +603,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"",
+				"tests/functional/ApplicationTest.php"
+			]
 		],
 		"width": 0.0
 	},
@@ -294,7 +633,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 261.0,
+	"side_bar_width": 224.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
