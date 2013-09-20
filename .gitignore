@@ -193,3 +193,5 @@ app/cache/dev/appDevUrlMatcher.php
 *.sublime-workspace
 
 *.sublime-workspace
+
+*.log
