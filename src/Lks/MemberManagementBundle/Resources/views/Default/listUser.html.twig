@@ -1,15 +1,17 @@
-{% extends "LksUserManagementBundle::layout.html.twig" %}
+{% extends "LksMemberManagementBundle::layout.html.twig" %}
 {% block content %}
 	<table class="table">
 		<thead>
 			<th>First name</th>
 			<th>Last name</th>
+			<th>Actions</th>
 		</thead>
 		<tbody>
 			{% for member in members %}
 				<tr>
 					<td>{{ member.firstname|e }}</td>
 					<td>{{ member.lastname|e }}</td>
+					<td><a href="delete/{{ member.id|e }}" class="btn btn-danger">Delete</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

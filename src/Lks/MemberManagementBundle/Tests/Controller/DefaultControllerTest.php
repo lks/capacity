@@ -1,6 +1,6 @@
 <?php
 
-namespace Lks\UserManagementBundle\Tests\Controller;
+namespace Lks\MemberManagementBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

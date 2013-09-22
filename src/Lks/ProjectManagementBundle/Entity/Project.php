@@ -1,7 +1,7 @@
 <?php
 namespace Lks\ProjectManagementBundle\Entity;
 
-use Lks\UserManagementBundle\Entity\Member;
+use Lks\MemberManagementBundle\Entity\Member;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,10 +26,20 @@ class Project
 	/**
      * @ORM\Column(type="text")
      */
-	protected $description;
+    protected $description;
+
+    /**
+     * @ORM\Column(type="decimal")
+     */
+    protected $estimation;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+	protected $priority;
 
 	/**
-     * @ORM\ManyToOne(targetEntity="Lks\UserManagementBundle\Entity\Member", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="Lks\MemberManagementBundle\Entity\Member", inversedBy="projects")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
 	protected $member;
@@ -93,10 +103,10 @@ class Project
     /**
      * Set member
      *
-     * @param \Lks\ProjectManagementBundle\Entity\Member $member
+     * @param \Lks\UserManagementBundle\Entity\Member $member
      * @return Project
      */
-    public function setMember(\Lks\ProjectManagementBundle\Entity\Member $member = null)
+    public function setMember(\Lks\UserManagementBundle\Entity\Member $member = null)
     {
         $this->member = $member;
     
@@ -106,10 +116,56 @@ class Project
     /**
      * Get member
      *
-     * @return \Lks\ProjectManagementBundle\Entity\Member 
+     * @return \Lks\UserManagementBundle\Entity\Member 
      */
     public function getMember()
     {
         return $this->member;
+    }
+
+    /**
+     * Set estimation
+     *
+     * @param float $estimation
+     * @return Project
+     */
+    public function setEstimation($estimation)
+    {
+        $this->estimation = $estimation;
+    
+        return $this;
+    }
+
+    /**
+     * Get estimation
+     *
+     * @return float 
+     */
+    public function getEstimation()
+    {
+        return $this->estimation;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     * @return Project
+     */
+    public function setPriority($beginDate)
+    {
+        $this->priority = $priority;
+    
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }

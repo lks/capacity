@@ -1,13 +1,13 @@
 <?php
 
-namespace Lks\UserManagementBundle\Controller;
+namespace Lks\MemberManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Lks\UserManagementBundle\Entity\Member;
+use Lks\MemberManagementBundle\Entity\Member;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class MemberController extends Controller
 {
     public function createAction(Request $request)
     {
@@ -29,10 +29,10 @@ class DefaultController extends Controller
 		    $em->flush();
 
 		    //TODO : Define a route
-		    return $this->render('LksUserManagementBundle:Default:yata.html.twig');
+		    return $this->render('LksMemberManagementBundle:Default:yata.html.twig');
     	}
 
-        return $this->render('LksUserManagementBundle:Default:index.html.twig', array(
+        return $this->render('LksMemberManagementBundle:Default:index.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -41,7 +41,7 @@ class DefaultController extends Controller
     {
         //get all user items
         $repository = $this->getDoctrine()
-            ->getRepository('LksUserManagementBundle:Member');
+            ->getRepository('LksMemberManagementBundle:Member');
 
         $members = $repository->findAll();
 
@@ -64,9 +64,21 @@ class DefaultController extends Controller
             $em->flush();
 
             //TODO : Define a route
-            return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
+            return $this->render('LksMemberManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
         }
         // The security layer will intercept this request
-        return $this->render('LksUserManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
+        return $this->render('LksMemberManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
+    }
+
+    public function deleteAction($memberId)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('LksMemberManagementBundle:Member');
+        $member=$repository->find($memberId);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($member);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('lmm_homepage'));
     }
 }

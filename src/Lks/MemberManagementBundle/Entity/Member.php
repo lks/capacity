@@ -1,5 +1,5 @@
 <?php
-namespace Lks\UserManagementBundle\Entity;
+namespace Lks\MemberManagementBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

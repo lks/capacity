@@ -26,11 +26,100 @@ class Project
 	/**
      * @ORM\Column(type="text")
      */
-	protected $description;
+    protected $description;
+
+    /**
+     * @ORM\Column(type="decimal")
+     */
+    protected $estimation;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+	protected $beginDate;
 
 	/**
-     * @ORM\ManyToOne(targetEntity="Member", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="Lks\UserManagementBundle\Entity\Member", inversedBy="projects")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
 	protected $member;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Project
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Project
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set member
+     *
+     * @param \Lks\UserManagementBundle\Entity\Member $member
+     * @return Project
+     */
+    public function setMember(\Lks\UserManagementBundle\Entity\Member $member = null)
+    {
+        $this->member = $member;
+    
+        return $this;
+    }
+
+    /**
+     * Get member
+     *
+     * @return \Lks\UserManagementBundle\Entity\Member 
+     */
+    public function getMember()
+    {
+        return $this->member;
+    }
 }

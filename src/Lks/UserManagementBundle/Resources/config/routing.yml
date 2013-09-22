@@ -1,6 +1,0 @@
-lum_create_user:
-    pattern:  /create
-    defaults: { _controller: LksUserManagementBundle:Default:create }
-lum_list_users:
-    pattern:  /members
-    defaults: { _controller: LksUserManagementBundle:Default:members }

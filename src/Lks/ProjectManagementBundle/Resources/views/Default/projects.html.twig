@@ -1,0 +1,28 @@
+{% extends "LksProjectManagementBundle::layout.html.twig" %}
+{% block content %}
+	<h2>Projects listing</h2>
+	<table class="table">
+		<thead>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Member</th>
+			<th>Priority</th>
+			<th>Estimation</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+			{% for project in projects %}
+				<tr>
+					<td>{{ project.name|e }}</td>
+					<td>{{ project.description|e }}</td>
+					<td>{{ project.member.firstname|e }}</td>
+					<td>{{ project.priority|e }}</td>
+					<td>{{ project.estimation|e }} day(s)</td>
+					<td><a href="delete/{{ project.id|e }}" class="btn btn-danger">Delete</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<h2>Create a project</h2>
+	{{ form(form) }}
+{% endblock %}

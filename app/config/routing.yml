@@ -2,7 +2,7 @@ lks_project_management:
     resource: "@LksProjectManagementBundle/Resources/config/routing.yml"
     prefix:   /
 
-lks_user_management:
-    resource: "@LksUserManagementBundle/Resources/config/routing.yml"
+lks_member_management:
+    resource: "@LksMemberManagementBundle/Resources/config/routing.yml"
     prefix:   /
 
