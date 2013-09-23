@@ -25,10 +25,13 @@ class ProjectController extends Controller
             ->add('name', 'text')
             ->add('description', 'textarea')
             ->add('estimation', 'integer')
-            ->add('priority', 'text')
-            ->add('member', 'entity', array(
-                    'class' => 'LksMemberManagementBundle:Member',
-                    'property' => 'firstname',))
+            ->add('priority', 'choice', array(
+                            'choices' => array('P1' => 'P1', 
+                                    'P2' => 'P2',
+                                    'P3' => 'P3')))
+            // ->add('member', 'entity', array(
+            //         'class' => 'LksMemberManagementBundle:Member',
+            //         'property' => 'firstname',))
             ->add('save', 'submit')
             ->getForm();
 

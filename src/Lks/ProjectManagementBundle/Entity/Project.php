@@ -103,10 +103,10 @@ class Project
     /**
      * Set member
      *
-     * @param \Lks\UserManagementBundle\Entity\Member $member
+     * @param \Lks\MemberManagementBundle\Entity\Member $member
      * @return Project
      */
-    public function setMember(\Lks\UserManagementBundle\Entity\Member $member = null)
+    public function setMember(\Lks\MemberManagementBundle\Entity\Member $member = null)
     {
         $this->member = $member;
     
@@ -152,7 +152,7 @@ class Project
      * @param string $priority
      * @return Project
      */
-    public function setPriority($beginDate)
+    public function setPriority($priority)
     {
         $this->priority = $priority;
     

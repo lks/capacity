@@ -5,7 +5,6 @@
 		<thead>
 			<th>Name</th>
 			<th>Description</th>
-			<th>Member</th>
 			<th>Priority</th>
 			<th>Estimation</th>
 			<th>Actions</th>
@@ -15,7 +14,6 @@
 				<tr>
 					<td>{{ project.name|e }}</td>
 					<td>{{ project.description|e }}</td>
-					<td>{{ project.member.firstname|e }}</td>
 					<td>{{ project.priority|e }}</td>
 					<td>{{ project.estimation|e }} day(s)</td>
 					<td><a href="delete/{{ project.id|e }}" class="btn btn-danger">Delete</a></td>
