@@ -27,6 +27,11 @@ class Member
 	protected $lastname;
 
     /**
+     * @ORM\OneToMany(targetEntity="Lks\MemberManagementBundle\Entity\Member", mappedBy="member")
+     */
+    protected $projects;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -80,5 +85,45 @@ class Member
     public function getLastname()
     {
         return $this->lastname;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add projects
+     *
+     * @param \Lks\MemberManagementBundle\Entity\Member $projects
+     * @return Member
+     */
+    public function addProject(\Lks\MemberManagementBundle\Entity\Member $projects)
+    {
+        $this->projects[] = $projects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \Lks\MemberManagementBundle\Entity\Member $projects
+     */
+    public function removeProject(\Lks\MemberManagementBundle\Entity\Member $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
     }
 }

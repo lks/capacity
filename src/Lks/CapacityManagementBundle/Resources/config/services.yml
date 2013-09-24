@@ -1,0 +1,7 @@
+parameters:
+#    lks_capacity_management.example.class: Lks\CapacityManagementBundle\Example
+
+services:
+#    lks_capacity_management.example:
+#        class: %lks_capacity_management.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

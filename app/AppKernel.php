@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Lks\MemberManagementBundle\LksMemberManagementBundle(),
             new Lks\ProjectManagementBundle\LksProjectManagementBundle(),
+            new Lks\CapacityManagementBundle\LksCapacityManagementBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

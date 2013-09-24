@@ -1,3 +1,7 @@
+lks_capacity_management:
+    resource: "@LksCapacityManagementBundle/Resources/config/routing.yml"
+    prefix:   /
+
 lks_project_management:
     resource: "@LksProjectManagementBundle/Resources/config/routing.yml"
     prefix:   /
@@ -6,3 +10,6 @@ lks_member_management:
     resource: "@LksMemberManagementBundle/Resources/config/routing.yml"
     prefix:   /
 
+lks_capacity_management:
+    resource: "@LksCapacityManagementBundle/Resources/config/routing.yml"
+    prefix:   /
