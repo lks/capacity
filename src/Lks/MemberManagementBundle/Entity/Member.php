@@ -1,6 +1,8 @@
 <?php
 namespace Lks\MemberManagementBundle\Entity;
 
+use Lks\ProjectManagementBundle\Entity\Project;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +29,7 @@ class Member
 	protected $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity="Lks\MemberManagementBundle\Entity\Member", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Lks\ProjectManagementBundle\Entity\Project", mappedBy="member")
      */
     protected $projects;
 
@@ -97,10 +99,10 @@ class Member
     /**
      * Add projects
      *
-     * @param \Lks\MemberManagementBundle\Entity\Member $projects
+     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
      * @return Member
      */
-    public function addProject(\Lks\MemberManagementBundle\Entity\Member $projects)
+    public function addProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
     {
         $this->projects[] = $projects;
     
@@ -110,9 +112,9 @@ class Member
     /**
      * Remove projects
      *
-     * @param \Lks\MemberManagementBundle\Entity\Member $projects
+     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
      */
-    public function removeProject(\Lks\MemberManagementBundle\Entity\Member $projects)
+    public function removeProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
     {
         $this->projects->removeElement($projects);
     }

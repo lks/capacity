@@ -38,6 +38,11 @@ class Project
      */
 	protected $priority;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $beginDate;
+
 	/**
      * @ORM\ManyToOne(targetEntity="Lks\MemberManagementBundle\Entity\Member", inversedBy="projects")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
@@ -167,5 +172,28 @@ class Project
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * Set beginDate
+     *
+     * @param \DateTime $beginDate
+     * @return Project
+     */
+    public function setBeginDate($beginDate)
+    {
+        $this->beginDate = $beginDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get beginDate
+     *
+     * @return \DateTime 
+     */
+    public function getBeginDate()
+    {
+        return $this->beginDate;
     }
 }

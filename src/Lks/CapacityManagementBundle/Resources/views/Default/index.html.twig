@@ -1,8 +1,12 @@
 {% extends "LksMemberManagementBundle::layout.html.twig" %}
 
 {% block content %}
-	<p>In this section we will generate our capacity planning</p>
-	<a href="generate" class="btn btn-primary">Generate</a>
+	<ul>
+	{% for availibility in availibilities %}
+		<li><{{ availibility.member.firstname|e }}/li>
+		<li><{{ availibility.availibilityDate|e }}/li>
+	{% endfor %}
+	</ul>
 {% endblock %}
 
 
