@@ -48,5 +48,12 @@ class CapacityServiceTest extends \PHPUnit_Framework_TestCase
     	$testDate = $serviceToTest->computeAvailibilities($beginDate, $estimation);
     	$this->assertEquals(new \DateTime('NOW'), $testDate);
 
+    	//Test Case 3
+    	$beginDate = 7;
+    	$estimation = null;	
+
+    	$testDate = $serviceToTest->computeAvailibilities($beginDate, $estimation);
+    	$this->assertEquals(new \DateTime('NOW'), $testDate);
+
     }
 }

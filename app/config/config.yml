@@ -66,5 +66,5 @@ swiftmailer:
     spool:     { type: memory }
 
 services:
-    my_capacity:
+    capacity:
         class:        Lks\CapacityManagementBundle\Services\CapacityService

@@ -21,6 +21,7 @@ class CapacityService
         	$availibility = new Availibility();
         	$availibility->setMember($member);
         	$projects = $member->getProjects();
+
         	foreach ($projects as $project)
         	{
         		$endDate = $this->computeAvailibilities($project->getBeginDate(), $project->getEstimation());
@@ -31,7 +32,9 @@ class CapacityService
         			{
         				$availibility->setAvailibilityDate($endDate);
         			}
-        		} else {
+        		} 
+        		else 
+        		{
         			$availibility->setAvailibilityDate($endDate);
         		}
         	}

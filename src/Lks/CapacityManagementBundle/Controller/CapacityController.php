@@ -18,8 +18,8 @@ class CapacityController extends Controller
         // Check the availibility of a member
         $members = $repository->findAll();
 
-        $capacity = $this->get('my_capacity');
-        $availibilities = $capacity->getMembersAvailibilities($members);
+        $capacityService = $this->get('capacity');
+        $availibilities = $capacityService->getMembersAvailibilities($members);
 
         return $this->render('LksCapacityManagementBundle:Default:index.html.twig', array('availibilities' => $availibilities));
     }

@@ -1,10 +1,10 @@
 {% extends "LksMemberManagementBundle::layout.html.twig" %}
 
 {% block content %}
+	<h2>Availibility listing</h2>
 	<ul>
 	{% for availibility in availibilities %}
-		<li>{{ availibility.member.firstname|e }}</li>
-		<li>{{ availibility.availibilityDate|date("d/m/Y") }}</li>
+		<li>{{ availibility.member.firstname|e }} : {{ availibility.availibilityDate|date("d/m/Y") }}</li>
 	{% endfor %}
 	</ul>
 {% endblock %}
