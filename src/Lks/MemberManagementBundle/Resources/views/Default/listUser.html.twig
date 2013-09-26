@@ -11,7 +11,7 @@
 				<tr>
 					<td>{{ member.firstname|e }}</td>
 					<td>{{ member.lastname|e }}</td>
-					<td><a href="delete/{{ member.id|e }}" class="btn btn-danger">Delete</a></td>
+					<td><a href="members/delete/{{ member.id|e }}" class="btn btn-danger">Delete</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

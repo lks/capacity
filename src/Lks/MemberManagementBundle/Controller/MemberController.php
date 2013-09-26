@@ -75,9 +75,13 @@ class MemberController extends Controller
         $repository = $this->getDoctrine()
             ->getRepository('LksMemberManagementBundle:Member');
         $member=$repository->find($memberId);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($member);
-        $em->flush();
+        
+        if($member != null)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($member);
+            $em->flush();
+        }
 
         return $this->redirect($this->generateUrl('lmm_homepage'));
     }

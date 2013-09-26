@@ -2,20 +2,64 @@
 
 namespace Lks\CapacityManagementBundle\Services;
 
+use Lks\CapacityManagementBundle\Entity\Availibility;
+
 class CapacityService
 {
-	/**
-	 * Find the next availibility of all members
-	 */
-	function findNextAvailibility()
+	
+	function __construct() {}
+
+	public function getMembersAvailibilities($members)
 	{
-		//Query all members to find the availibility 
-		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery(
-		    'SELECT p
-		    FROM LksMemberManagementBundle:Member m, LksProjectManagementBundle:Project
-		    WHERE p.price > :price
-		    ORDER BY p.price ASC'
-		)->setParameter('price', '19.99');
+		//list of availibility of the members
+        $availibilities = array();
+
+        for($i=0; $i<count($members); $i++)
+        {
+        	$member = $members[$i];
+
+        	$availibility = new Availibility();
+        	$availibility->setMember($member);
+
+        	for($j=0; $j<count($member->getProjects()); $j++)
+        	{
+        		$project = $member->getProjects()[$j];
+        		$endDate = $this->computeAvailibilities($project->getBeginDate(), $project->getEstimation());
+
+        		if($availibility->getAvailibilityDate() != null)
+        		{
+        			if ($availibility->getAvailibilityDate() < $endDate) 
+        			{
+        				$availibility->setAvailibilityDate($endDate);
+        			}
+        		} else {
+        			$availibility->setAvailibilityDate($endDate);
+        		}
+        	}
+        	$availibilities[$i] = $availibility;
+        }
+        return $availibilities;
+	}
+
+	/**
+	 * Compute the date of the member avalibility
+	 *
+	 * @param beginDate Begin date of the project
+	 * @param estimation Estimation defined
+	 */
+	protected function computeAvailibilities($beginDate, $estimation) 
+	{
+		$availibilityDate = new \DateTime('NOW');
+		if($beginDate != null && $estimation != null)
+		{
+			$availibilityDate = $beginDate;
+
+			if($estimation/5 > 1){
+				$estimation = $estimation+2;
+			}
+
+			$availibilityDate->add(new \DateInterval('P'.$estimation.'D'));
+		}
+		return $availibilityDate;
 	}
 }

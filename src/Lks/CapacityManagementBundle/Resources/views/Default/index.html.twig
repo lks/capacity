@@ -3,8 +3,8 @@
 {% block content %}
 	<ul>
 	{% for availibility in availibilities %}
-		<li><{{ availibility.member.firstname|e }}/li>
-		<li><{{ availibility.availibilityDate|e }}/li>
+		<li>{{ availibility.member.firstname|e }}</li>
+		<li>{{ availibility.availibilityDate|date("d/m/Y") }}</li>
 	{% endfor %}
 	</ul>
 {% endblock %}

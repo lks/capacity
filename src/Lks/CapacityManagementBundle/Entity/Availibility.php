@@ -15,7 +15,7 @@ class Availibility
 
 	public function getMember()
 	{
-		return $member;
+		return $this->member;
 	}
 
 	public function setMember($member)
@@ -25,7 +25,7 @@ class Availibility
 
 	public function getAvailibilityDate()
 	{
-		return $availibilityDate;
+		return $this->availibilityDate;
 	}
 
 	public function setAvailibilityDate($availibilityDate)

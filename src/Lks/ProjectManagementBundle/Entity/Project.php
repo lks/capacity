@@ -39,7 +39,7 @@ class Project
 	protected $priority;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     protected $beginDate;
 

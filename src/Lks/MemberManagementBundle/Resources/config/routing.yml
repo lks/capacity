@@ -1,10 +1,10 @@
-lum_create_user:
+lmm_create_user:
     pattern:  /create
     defaults: { _controller: LksMemberManagementBundle:Member:create }
-lum_homepage:
+lmm_homepage:
     pattern:  /members
     defaults: { _controller: LksMemberManagementBundle:Member:members }
 
 lmm_delete_member:
-    pattern:  /delete/{memberId}
+    pattern:  /members/delete/{memberId}
     defaults: { _controller: LksMemberManagementBundle:Member:delete }
