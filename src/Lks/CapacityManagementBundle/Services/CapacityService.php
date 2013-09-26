@@ -23,7 +23,7 @@ class CapacityService
 
         	for($j=0; $j<count($member->getProjects()); $j++)
         	{
-        		$project = $member->getProjects()[$j];
+        		$project = array_shift($member->getProjects());
         		$endDate = $this->computeAvailibilities($project->getBeginDate(), $project->getEstimation());
 
         		if($availibility->getAvailibilityDate() != null)
@@ -47,7 +47,7 @@ class CapacityService
 	 * @param beginDate Begin date of the project
 	 * @param estimation Estimation defined
 	 */
-	protected function computeAvailibilities($beginDate, $estimation) 
+	public function computeAvailibilities($beginDate, $estimation) 
 	{
 		$availibilityDate = new \DateTime('NOW');
 		if($beginDate != null && $estimation != null)
