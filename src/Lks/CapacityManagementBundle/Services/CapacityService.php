@@ -20,10 +20,9 @@ class CapacityService
 
         	$availibility = new Availibility();
         	$availibility->setMember($member);
-
-        	for($j=0; $j<count($member->getProjects()); $j++)
+        	$projects = $member->getProjects();
+        	foreach ($projects as $project)
         	{
-        		$project = array_shift($member->getProjects());
         		$endDate = $this->computeAvailibilities($project->getBeginDate(), $project->getEstimation());
 
         		if($availibility->getAvailibilityDate() != null)
