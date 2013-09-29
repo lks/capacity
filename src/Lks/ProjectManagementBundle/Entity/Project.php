@@ -43,6 +43,11 @@ class Project
      */
     protected $beginDate;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $endDate;
+
 	/**
      * @ORM\ManyToOne(targetEntity="Lks\MemberManagementBundle\Entity\Member", inversedBy="projects")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")

@@ -3,10 +3,12 @@
 {% block content %}
 	<h2>Availibility listing</h2>
 	<ul>
-	{% for availibility in availibilities %}
-		<li>{{ availibility.member.firstname|e }} : {{ availibility.availibilityDate|date("d/m/Y") }}</li>
+	{% for member in members %}
+		<li>{{ member.firstname|e }} : {{ member.availibilityDate|date("d/m/Y") }}</li>
 	{% endfor %}
 	</ul>
+	<h2>Capacity Planning</h2>
+	
 {% endblock %}
 
 

@@ -37,5 +37,10 @@
             </exclude>
         </whitelist>
     </filter>
-
+    <php>
+        <var name="DB_DSN" value="mysql:dbname=capacity;host=localhost" />
+        <var name="DB_USER" value="cap1" />
+        <var name="DB_PASSWD" value="cap1" />
+        <var name="DB_DBNAME" value="capacity" />
+    </php>
 </phpunit>

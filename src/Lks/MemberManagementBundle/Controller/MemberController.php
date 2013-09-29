@@ -40,11 +40,10 @@ class MemberController extends Controller
     public function membersAction(Request $request)
     {
         //get all user items
-        $repository = $this->getDoctrine()
+        $repository = $this->getDoctrine() 
             ->getRepository('LksMemberManagementBundle:Member');
 
         $members = $repository->findAll();
-
         //begin of the form building
         $member = new Member();
 

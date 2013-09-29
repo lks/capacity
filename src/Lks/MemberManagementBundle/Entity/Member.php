@@ -29,6 +29,11 @@ class Member
 	protected $lastname;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $availibilityDate;
+
+    /**
      * @ORM\OneToMany(targetEntity="Lks\ProjectManagementBundle\Entity\Project", mappedBy="member")
      */
     protected $projects;
@@ -127,5 +132,28 @@ class Member
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Set availibilityDate
+     *
+     * @param \DateTime $availibilityDate
+     * @return Member
+     */
+    public function setAvailibilityDate($availibilityDate)
+    {
+        $this->availibilityDate = $availibilityDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get availibilityDate
+     *
+     * @return \DateTime 
+     */
+    public function getAvailibilityDate()
+    {
+        return $this->availibilityDate;
     }
 }

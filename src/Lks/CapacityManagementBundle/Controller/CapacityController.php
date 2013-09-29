@@ -4,23 +4,29 @@ namespace Lks\CapacityManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lks\CapacityManagementBundle\Services\CapacityService;
+use Lks\ProjectManagementBundle\Services\ProjectService;
 
 class CapacityController extends Controller
 {
     public function generateAction(Request $request)
     {
-    	$logger = $this->get('logger');
+        $projectDao = $this->get('projectDao');
+        $memberDao = $this->get('memberDao');
+        $capacityService = new CapacityService($memberDao, $projectDao);
 
-    	//Query all member to determine the availibility
-    	$repository = $this->getDoctrine()
-            ->getRepository('LksMemberManagementBundle:Member');
-        
-        // Check the availibility of a member
-        $members = $repository->findAll();
+        $members = $capacityService->listMembersAvailibilities();
+        $capacityPlanning = $capacityService->computeCapacityPlanning();
 
-        $capacityService = $this->get('capacity');
-        $availibilities = $capacityService->getMembersAvailibilities($members);
+        //get project without Member and BeginDate
+        // $projectDao = $this->get('projectDao');
+        // $projectService = new ProjectService($projectDao);
+        // $openProjects = $projectService->getOpenProjects();
 
-        return $this->render('LksCapacityManagementBundle:Default:index.html.twig', array('availibilities' => $availibilities));
+        return $this->render('LksCapacityManagementBundle:Default:index.html.twig', 
+            array(
+                'members' => $members,
+                'capacityPlanning' => $capacityPlanning
+                ));
     }
 }

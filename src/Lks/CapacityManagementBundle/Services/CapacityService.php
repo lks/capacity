@@ -2,12 +2,67 @@
 
 namespace Lks\CapacityManagementBundle\Services;
 
+use Lks\CapacityManagementBundle\Services\ICapacityService;
 use Lks\CapacityManagementBundle\Entity\Availibility;
+use Lks\MemberManagementBundle\Services\MemberService;
+use Lks\ProjectManagementBundle\Services\ProjectService;
 
-class CapacityService
+class CapacityService implements ICapacityService
 {
-	
-	function __construct() {}
+	protected $memberDao;
+	protected $projectDao;
+
+	public function __construct($memberDao, $projectDao)
+	{
+		$this->memberDao = $memberDao;
+		$this->projectDao = $projectDao;
+	}
+
+	public function listMembersAvailibilities()
+	{
+		$memberService = new MemberService($this->memberDao);
+		return $memberService->listMembers();
+	}
+
+	public function computeCapacityPlanning()
+	{
+		$memberService = new MemberService($this->memberDao);
+		$projectService = new ProjectService($this->projectDao);
+
+		$nbMaxDay = 60;
+		$members = $memberService->listMembers();
+		$obj = new Object();
+		$currentDate = new DateTime('NOW');
+		$i = 0;
+		foreach($members as $member)
+		{
+			$obj->member = $member;
+
+			foreach($member->getProjects() as $project)
+			{
+				$beginPercent = 0;
+				$durationPercent = 0;
+				$projectDesign = new ProjectDesign();
+				$projectDesign->setProject($project);
+
+				//compute the percent of the project design
+				if($project->getBeginDate() < $currentDate)
+				{
+					$durationPercent = $project->getEndDate() - $currentDate;
+					$beginPercent = 0;
+				} else {
+					$durationPercent = $project->getEndDate() - $project->getBeginDate();
+					$beginPercent = $project->getBeginDate() - $currentDate;
+				}
+				$projectDesign->setDurationPercent($durationPercent);
+				$projectDesign->setBeginPercent($beginPercent);
+			}
+			$obj->projects[$i] = $projectDesign;
+			$i++;
+		}
+		return null;
+	}
+
 
 	public function getMembersAvailibilities($members)
 	{
@@ -22,10 +77,11 @@ class CapacityService
         	$availibility->setMember($member);
         	$projects = $member->getProjects();
 
+        	//Compute the endDate of the project and in function of the endDate of each project,
+        	// we get the last endDate only.
         	foreach ($projects as $project)
         	{
         		$endDate = $this->computeAvailibilities($project->getBeginDate(), $project->getEstimation());
-
         		if($availibility->getAvailibilityDate() != null)
         		{
         			if ($availibility->getAvailibilityDate() < $endDate) 

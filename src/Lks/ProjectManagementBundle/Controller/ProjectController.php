@@ -15,7 +15,6 @@ class ProjectController extends Controller
     	//get all user items
         $repository = $this->getDoctrine()
             ->getRepository('LksProjectManagementBundle:Project');
-
         $projects = $repository->findAll();
 
         //begin of the form building

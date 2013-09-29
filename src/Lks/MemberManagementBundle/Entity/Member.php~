@@ -1,6 +1,8 @@
 <?php
 namespace Lks\MemberManagementBundle\Entity;
 
+use Lks\ProjectManagementBundle\Entity\Project;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +29,12 @@ class Member
 	protected $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity="Lks\MemberManagementBundle\Entity\Member", mappedBy="member")
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $availibilityDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Lks\ProjectManagementBundle\Entity\Project", mappedBy="member")
      */
     protected $projects;
 
@@ -85,5 +92,45 @@ class Member
     public function getLastname()
     {
         return $this->lastname;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add projects
+     *
+     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
+     * @return Member
+     */
+    public function addProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
+    {
+        $this->projects[] = $projects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
+     */
+    public function removeProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
     }
 }
