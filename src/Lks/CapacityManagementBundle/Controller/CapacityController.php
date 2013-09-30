@@ -26,7 +26,7 @@ class CapacityController extends Controller
         return $this->render('LksCapacityManagementBundle:Default:index.html.twig', 
             array(
                 'members' => $members,
-                'capacityPlanning' => $capacityPlanning
+                'capacityPlanning' => $capacityPlanning,
                 ));
     }
 }

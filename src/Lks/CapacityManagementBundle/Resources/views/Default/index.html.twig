@@ -8,7 +8,14 @@
 	{% endfor %}
 	</ul>
 	<h2>Capacity Planning</h2>
-	
+	{% for item in capacityPlanning %}
+		<li>{{ item.member.firstname|e }} : {{ item.projectDesigns|length }}</li>
+		<ul>
+			{% for projectDesign in item.projectDesigns %}
+				<li>{{ projectDesign.project.name|e }}</li>
+			{% endfor %}
+		</ul>
+	{% endfor %}
 {% endblock %}
 
 

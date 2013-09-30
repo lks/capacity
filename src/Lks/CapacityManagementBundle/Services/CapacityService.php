@@ -4,6 +4,8 @@ namespace Lks\CapacityManagementBundle\Services;
 
 use Lks\CapacityManagementBundle\Services\ICapacityService;
 use Lks\CapacityManagementBundle\Entity\Availibility;
+use Lks\CapacityManagementBundle\Entity\CapacityDesign;
+use Lks\CapacityManagementBundle\Entity\ProjectDesign;
 use Lks\MemberManagementBundle\Services\MemberService;
 use Lks\ProjectManagementBundle\Services\ProjectService;
 
@@ -31,36 +33,46 @@ class CapacityService implements ICapacityService
 
 		$nbMaxDay = 60;
 		$members = $memberService->listMembers();
-		$obj = new Object();
-		$currentDate = new DateTime('NOW');
-		$i = 0;
+		$designs = array();
+		$currentDate = new \DateTime('NOW');
 		foreach($members as $member)
 		{
-			$obj->member = $member;
-
+			$cap = new CapacityDesign();
+			$cap->setMember($member);
 			foreach($member->getProjects() as $project)
 			{
-				$beginPercent = 0;
-				$durationPercent = 0;
-				$projectDesign = new ProjectDesign();
-				$projectDesign->setProject($project);
-
-				//compute the percent of the project design
-				if($project->getBeginDate() < $currentDate)
-				{
-					$durationPercent = $project->getEndDate() - $currentDate;
-					$beginPercent = 0;
-				} else {
-					$durationPercent = $project->getEndDate() - $project->getBeginDate();
-					$beginPercent = $project->getBeginDate() - $currentDate;
-				}
-				$projectDesign->setDurationPercent($durationPercent);
-				$projectDesign->setBeginPercent($beginPercent);
+				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate));
 			}
-			$obj->projects[$i] = $projectDesign;
-			$i++;
+			$designs[count($designs)] = $cap;
 		}
-		return null;
+		return $designs;
+	}
+
+	/**
+	 * Create the ProjectDesign Object from the project and the currentDate.
+	 * The percent of the beginning form and the width of the form.
+	 *
+	 * @param ProjectDesign
+	 */
+	private function generateProjectDesign($project, \DateTime $currentDate)
+	{
+		$beginPercent = 0;
+		$durationPercent = 0;
+		$projectDesign = new ProjectDesign();
+		$projectDesign->setProject($project);
+
+		//compute the percent of the project design
+		$beginDate = $project->getBeginDate();
+		if($beginDate != null &&  ($beginDate->diff($currentDate)->days < 0))
+		{
+			$durationPercent = $projectroject->getEndDate()->diff($currentDate);
+			$beginPercent = 0;	
+		} else {
+			$durationPercent = $project->getEndDate()->diff($project->getBeginDate());
+			$beginPercent = $project->getBeginDate()->diff($currentDate);
+		}
+		$projectDesign->setDurationPercent($durationPercent);
+		$projectDesign->setBeginPercent($beginPercent);
 	}
 
 

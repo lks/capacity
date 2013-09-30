@@ -45,7 +45,7 @@ class Project
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     */
+     */ 
     protected $endDate;
 
 	/**
@@ -200,5 +200,28 @@ class Project
     public function getBeginDate()
     {
         return $this->beginDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return Project
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime 
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 }
