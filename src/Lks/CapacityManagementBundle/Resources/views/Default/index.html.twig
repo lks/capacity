@@ -12,7 +12,7 @@
 		<li>{{ item.member.firstname|e }} : {{ item.projectDesigns|length }}</li>
 		<ul>
 			{% for projectDesign in item.projectDesigns %}
-				<li>{{ projectDesign.project.name|e }}</li>
+				
 			{% endfor %}
 		</ul>
 	{% endfor %}

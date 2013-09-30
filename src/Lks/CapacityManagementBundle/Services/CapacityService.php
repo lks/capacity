@@ -31,17 +31,19 @@ class CapacityService implements ICapacityService
 		$memberService = new MemberService($this->memberDao);
 		$projectService = new ProjectService($this->projectDao);
 
-		$nbMaxDay = 60;
+		$maxDateTimeStamp;
 		$members = $memberService->listMembers();
 		$designs = array();
 		$currentDate = new \DateTime('NOW');
+		$maxDateTimeStamp = $currentDate->add(new \DateInterval('P60D'))->getTimestamp();
+
 		foreach($members as $member)
 		{
 			$cap = new CapacityDesign();
 			$cap->setMember($member);
 			foreach($member->getProjects() as $project)
 			{
-				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate));
+				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate, $maxDateTimeStamp));
 			}
 			$designs[count($designs)] = $cap;
 		}
@@ -54,25 +56,31 @@ class CapacityService implements ICapacityService
 	 *
 	 * @param ProjectDesign
 	 */
-	private function generateProjectDesign($project, \DateTime $currentDate)
+	private function generateProjectDesign($project, \DateTime $currentDate, $maxDateTimeStamp)
 	{
-		$beginPercent = 0;
-		$durationPercent = 0;
+		$beginTimeStamp = 0;
+		$durationTimeStamp = 0;
 		$projectDesign = new ProjectDesign();
 		$projectDesign->setProject($project);
 
 		//compute the percent of the project design
 		$beginDate = $project->getBeginDate();
-		if($beginDate != null &&  ($beginDate->diff($currentDate)->days < 0))
+		if($currentDate->getTimestamp() > $beginDate->getTimestamp())
 		{
-			$durationPercent = $projectroject->getEndDate()->diff($currentDate);
-			$beginPercent = 0;	
+			$durationTimeStamp = $project->getEndDate()->getTimestamp() - $currentDate->getTimestamp();
+			$beginTimeStamp = 0;	
 		} else {
-			$durationPercent = $project->getEndDate()->diff($project->getBeginDate());
-			$beginPercent = $project->getBeginDate()->diff($currentDate);
+			$durationTimeStamp = $project->getEndDate()->getTimestamp() - $project->getBeginDate()->getTimestamp();
+			$beginTimeStamp = $project->getBeginDate()->getTimestamp() - $currentDate->getTimestamp();
 		}
-		$projectDesign->setDurationPercent($durationPercent);
-		$projectDesign->setBeginPercent($beginPercent);
+		$projectDesign->setDurationPercent($this->computePercent($durationTimeStamp, $maxDateTimeStamp));
+		$projectDesign->setBeginPercent($this->computePercent($beginTimeStamp, $maxDateTimeStamp));
+		return $projectDesign;
+	}
+
+	private function computePercent($value, $valueMax)
+	{
+		return ($value / $valueMax);
 	}
 
 

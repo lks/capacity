@@ -18,6 +18,10 @@ class CapacityController extends Controller
         $members = $capacityService->listMembersAvailibilities();
         $capacityPlanning = $capacityService->computeCapacityPlanning();
 
+        $logger = $this->get('logger');
+        $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getDurationPercent());
+        $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getBeginPercent());
+
         //get project without Member and BeginDate
         // $projectDao = $this->get('projectDao');
         // $projectService = new ProjectService($projectDao);
