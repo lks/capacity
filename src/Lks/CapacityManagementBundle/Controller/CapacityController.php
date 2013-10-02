@@ -13,17 +13,18 @@ class CapacityController extends Controller
     {
         $projectDao = $this->get('projectDao');
         $memberDao = $this->get('memberDao');
-        $capacityService = new CapacityService($memberDao, $projectDao);
+        $logger = $this->get('logger');
+        $capacityService = new CapacityService($memberDao, $projectDao, $logger);
 
         $members = $capacityService->listMembersAvailibilities();
         $capacityPlanning = $capacityService->computeCapacityPlanning();
 
-        $logger = $this->get('logger');
+        
         $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getDurationPercent());
         $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getBeginPercent());
 
         //get project without Member and BeginDate
-        // $projectDao = $this->get('projectDao');
+        // $projectDao = $this->get('projectectDao');
         // $projectService = new ProjectService($projectDao);
         // $openProjects = $projectService->getOpenProjects();
 

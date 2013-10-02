@@ -9,12 +9,13 @@
 	</ul>
 	<h2>Capacity Planning</h2>
 	{% for item in capacityPlanning %}
-		<li>{{ item.member.firstname|e }} : {{ item.projectDesigns|length }}</li>
-		<ul>
-			{% for projectDesign in item.projectDesigns %}
-				
-			{% endfor %}
-		</ul>
+		<h3>{{ item.member.firstname|e }}</h3>
+		<div class="progress progress-striped">
+		{% for projectDesign in item.projectDesigns %}
+			
+			  <div class="bar" style="width: {{ projectDesign.durationPercent|e }}%">{{ projectDesign.project.name|e }} | Duration: {{ projectDesign.durationPercent|e }} | Begin: {{ projectDesign.beginPercent|e }}</div>
+		{% endfor %}
+		</div>
 	{% endfor %}
 {% endblock %}
 

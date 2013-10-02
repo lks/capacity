@@ -13,11 +13,13 @@ class CapacityService implements ICapacityService
 {
 	protected $memberDao;
 	protected $projectDao;
+	protected $logger;
 
-	public function __construct($memberDao, $projectDao)
+	public function __construct($memberDao, $projectDao, $logger)
 	{
 		$this->memberDao = $memberDao;
 		$this->projectDao = $projectDao;
+		$this->logger = $logger;
 	}
 
 	public function listMembersAvailibilities()
@@ -35,7 +37,7 @@ class CapacityService implements ICapacityService
 		$members = $memberService->listMembers();
 		$designs = array();
 		$currentDate = new \DateTime('NOW');
-		$maxDateTimeStamp = $currentDate->add(new \DateInterval('P60D'))->getTimestamp();
+		$maxDate = (new \DateTime('NOW'))->add(new \DateInterval('P60D'));
 
 		foreach($members as $member)
 		{
@@ -43,7 +45,7 @@ class CapacityService implements ICapacityService
 			$cap->setMember($member);
 			foreach($member->getProjects() as $project)
 			{
-				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate, $maxDateTimeStamp));
+				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate, $maxDate));
 			}
 			$designs[count($designs)] = $cap;
 		}
@@ -56,7 +58,7 @@ class CapacityService implements ICapacityService
 	 *
 	 * @param ProjectDesign
 	 */
-	private function generateProjectDesign($project, \DateTime $currentDate, $maxDateTimeStamp)
+	private function generateProjectDesign($project, \DateTime $currentDate, $maxDate)
 	{
 		$beginTimeStamp = 0;
 		$durationTimeStamp = 0;
@@ -65,22 +67,29 @@ class CapacityService implements ICapacityService
 
 		//compute the percent of the project design
 		$beginDate = $project->getBeginDate();
+		$this->logger->info('generateProjectDesign::project: '.$project->getName());
+		
+
 		if($currentDate->getTimestamp() > $beginDate->getTimestamp())
 		{
+
 			$durationTimeStamp = $project->getEndDate()->getTimestamp() - $currentDate->getTimestamp();
+			$this->logger->info('generateProjectDesign::currentTimestamp: '.$currentDate->format('d-m-Y'));
+			$this->logger->info('generateProjectDesign::maxDate: '.$maxDate->format('d-m-Y'));
 			$beginTimeStamp = 0;	
 		} else {
 			$durationTimeStamp = $project->getEndDate()->getTimestamp() - $project->getBeginDate()->getTimestamp();
 			$beginTimeStamp = $project->getBeginDate()->getTimestamp() - $currentDate->getTimestamp();
 		}
-		$projectDesign->setDurationPercent($this->computePercent($durationTimeStamp, $maxDateTimeStamp));
-		$projectDesign->setBeginPercent($this->computePercent($beginTimeStamp, $maxDateTimeStamp));
+		$projectDesign->setDurationPercent($this->computePercent($durationTimeStamp, ($maxDate->getTimestamp() - $currentDate->getTimestamp())));
+		$projectDesign->setBeginPercent($this->computePercent($beginTimeStamp, ($maxDate->getTimestamp() - $currentDate->getTimestamp())));
 		return $projectDesign;
 	}
 
 	private function computePercent($value, $valueMax)
 	{
-		return ($value / $valueMax);
+		$this->logger->info('computePercent::value: '.$value.' :: valueMax: '.$valueMax);
+		return round(($value * 100 / $valueMax));
 	}
 
 
