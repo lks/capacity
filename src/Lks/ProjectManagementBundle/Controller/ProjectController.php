@@ -4,6 +4,7 @@ namespace Lks\ProjectManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\ProjectManagementBundle\Services\ProjectService;
 use Lks\MemberManagementBundle\Entity\Member;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,11 +79,9 @@ class ProjectController extends Controller
         if($form->isValid())
         {
             //@todo : determine the  begin date and the end date
-            //$projectService->planProject($project);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
+            $projectDao = $this->get('projectDao');
+            $projectService = new ProjectService($projectDao);
+            $projectService->planProject($project);
 
             //TODO : Define a route
             return $this->redirect($this->generateUrl('lks_project_management_homepage'));

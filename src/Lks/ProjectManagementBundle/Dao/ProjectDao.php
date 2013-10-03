@@ -22,4 +22,11 @@ class ProjectDao
 	{
         return $this->repository->findBy($params);
 	}
+
+    public function save($project)
+    {
+        $this->em->persist($project);
+        $this->em->flush();
+        return $project;
+    }
 }

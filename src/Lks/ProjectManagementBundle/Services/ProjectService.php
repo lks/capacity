@@ -24,7 +24,16 @@ class ProjectService
 	{
 		//get next availibility of the member selected
 		$member = $project->getMember();
+
+		//sort the projects list
+		$availibilityDate = $member->getAvailibilityDate();
 		
 		//compute the begin date and the end date
+		$project->setBeginDate($availibilityDate);
+		$endTmpDate = clone $availibilityDate;
+		$project->setEndDate($endTmpDate->add(new \DateInterval('P'.$project->getEstimation().'D')));
+
+		$this->projectDao->save($project);
+
 	}
 }

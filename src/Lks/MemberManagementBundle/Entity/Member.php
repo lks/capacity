@@ -135,25 +135,30 @@ class Member
     }
 
     /**
-     * Set availibilityDate
-     *
-     * @param \DateTime $availibilityDate
-     * @return Member
-     */
-    public function setAvailibilityDate($availibilityDate)
-    {
-        $this->availibilityDate = $availibilityDate;
-    
-        return $this;
-    }
-
-    /**
      * Get availibilityDate
      *
      * @return \DateTime 
      */
     public function getAvailibilityDate()
     {
+        //@todo : sort the projects list
+        $projects = array();
+        $projectsTh = $this->getProjects();
+        foreach($projectsTh as $project)
+        {
+            $projects[count($projects)] = $project;
+        }
+
+        $this->availibilityDate = new \DateTime('NOW');
+        if((isset($projects)) && (count($projects) > 0))
+        {
+            usort($projects, function($a, $b)
+                    {
+                        return $a > $b;
+                    });
+            $this->availibilityDate = $projects[0];
+        }
+
         return $this->availibilityDate;
     }
 }
