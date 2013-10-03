@@ -4,8 +4,7 @@ namespace Lks\CapacityManagementBundle\Services;
 
 use Lks\CapacityManagementBundle\Services\ICapacityService;
 use Lks\CapacityManagementBundle\Entity\Availibility;
-use Lks\CapacityManagementBundle\Entity\CapacityDesign;
-use Lks\CapacityManagementBundle\Entity\ProjectDesign;
+use Lks\CapacityManagementBundle\Entity\Capacity;
 use Lks\MemberManagementBundle\Services\MemberService;
 use Lks\ProjectManagementBundle\Services\ProjectService;
 
@@ -28,24 +27,28 @@ class CapacityService implements ICapacityService
 		return $memberService->listMembers();
 	}
 
-	public function computeCapacityPlanning()
+	public function listMembers()
+	{
+		$memberService = new MemberService($this->memberDao);
+		return $memberService->listMembers();
+	}
+
+	public function getCapacityPlanning()
 	{
 		$memberService = new MemberService($this->memberDao);
 		$projectService = new ProjectService($this->projectDao);
 
 		$maxDateTimeStamp;
 		$members = $memberService->listMembers();
-		$designs = array();
-		$currentDate = new \DateTime('NOW');
-		$maxDate = (new \DateTime('NOW'))->add(new \DateInterval('P60D'));
+		$capacities = array();
 
 		foreach($members as $member)
 		{
-			$cap = new CapacityDesign();
+			$cap = new Capacity();
 			$cap->setMember($member);
 			foreach($member->getProjects() as $project)
 			{
-				$cap->addProjectDesign($this->generateProjectDesign($project, $currentDate, $maxDate));
+				$cap->addProject(new ProjectLight($project));
 			}
 			$designs[count($designs)] = $cap;
 		}

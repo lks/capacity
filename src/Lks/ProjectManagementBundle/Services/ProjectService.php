@@ -19,4 +19,12 @@ class ProjectService
 	{
         return $this->projectDao->getProjects(array('member' => null));
 	}
+
+	public function planProject(Project $project)
+	{
+		//get next availibility of the member selected
+		$member = $project->getMember();
+		
+		//compute the begin date and the end date
+	}
 }

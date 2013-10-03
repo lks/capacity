@@ -8,12 +8,11 @@
 	{% endfor %}
 	</ul>
 	<h2>Capacity Planning</h2>
-	{% for item in capacityPlanning %}
+	{% for item in capacities %}
 		<h3>{{ item.member.firstname|e }}</h3>
-		<div class="progress progress-striped">
-		{% for projectDesign in item.projectDesigns %}
-			
-			  <div class="bar" style="width: {{ projectDesign.durationPercent|e }}%">{{ projectDesign.project.name|e }} | Duration: {{ projectDesign.durationPercent|e }} | Begin: {{ projectDesign.beginPercent|e }}</div>
+		<div class="progress progress">
+		{% for project in item.projects %}
+			  <div class="bar" style="width: {{ project.duration|e }}%">{{ project.name|e }} | Duration: {{ project.duration|e }}</div>
 		{% endfor %}
 		</div>
 	{% endfor %}

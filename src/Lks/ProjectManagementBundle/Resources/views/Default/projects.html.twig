@@ -16,7 +16,7 @@
 					<td>{{ project.description|e }}</td>
 					<td>{{ project.priority|e }}</td>
 					<td>{{ project.estimation|e }} day(s)</td>
-					<td><a href="delete/{{ project.id|e }}" class="btn btn-danger">Delete</a></td>
+					<td><a href="edit/{{ project.id|e }}" class="btn">Edit</a> <a href="delete/{{ project.id|e }}" class="btn btn-danger">Delete</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

@@ -19,5 +19,5 @@ interface ICapacityService
 	 *
 	 * @return array of CapacityPlanning Object
 	 */
-	public function computeCapacityPlanning();
+	public function getCapacityPlanning();
 }

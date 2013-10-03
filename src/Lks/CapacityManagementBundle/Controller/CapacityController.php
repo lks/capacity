@@ -5,7 +5,8 @@ namespace Lks\CapacityManagementBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Lks\CapacityManagementBundle\Services\CapacityService;
-use Lks\ProjectManagementBundle\Services\ProjectService;
+use Lks\ProjectManagementBundle\Entity\ProjectLight;
+use Lks\CapacityManagementBundle\Entity\Capacity;
 
 class CapacityController extends Controller
 {
@@ -16,22 +17,25 @@ class CapacityController extends Controller
         $logger = $this->get('logger');
         $capacityService = new CapacityService($memberDao, $projectDao, $logger);
 
-        $members = $capacityService->listMembersAvailibilities();
-        $capacityPlanning = $capacityService->computeCapacityPlanning();
+        $memberAvailibilities = $capacityService->listMembersAvailibilities();
+        $members = $capacityService->listMembers();
 
-        
-        $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getDurationPercent());
-        $logger->info('durationPercent : '.$capacityPlanning[0]->getProjectDesigns()[0]->getBeginPercent());
-
-        //get project without Member and BeginDate
-        // $projectDao = $this->get('projectectDao');
-        // $projectService = new ProjectService($projectDao);
-        // $openProjects = $projectService->getOpenProjects();
+        $capacities = array();
+        foreach($members as $member)
+        {
+            $cap = new Capacity();
+            $cap->setMember($member);
+            foreach($member->getProjects() as $project)
+            {
+                $cap->addProject(new ProjectLight($project, new \DateTime('NOW')));
+            }
+            $capacities[count($capacities)] = $cap;
+        }
 
         return $this->render('LksCapacityManagementBundle:Default:index.html.twig', 
             array(
                 'members' => $members,
-                'capacityPlanning' => $capacityPlanning,
+                'capacities' => $capacities,
                 ));
     }
 }

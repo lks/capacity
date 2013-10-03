@@ -62,6 +62,7 @@ class MemberController extends Controller
             $em->persist($member);
             $em->flush();
 
+            $members = $repository->findAll();
             //TODO : Define a route
             return $this->render('LksMemberManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
         }

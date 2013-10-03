@@ -52,6 +52,44 @@ class ProjectController extends Controller
         return $this->render('LksProjectManagementBundle:Default:projects.html.twig', array('projects' => $projects, 'form' => $form->createView()));
     }
 
+    public function editAction($projectId, Request $request)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('LksProjectManagementBundle:Project');
+        $project=$repository->find($projectId);
+
+        $form = $this->createFormBuilder($project)
+            ->add('name', 'text')
+            ->add('description', 'textarea')
+            ->add('estimation', 'integer')
+            ->add('priority', 'choice', array(
+                            'choices' => array('P1' => 'P1', 
+                                    'P2' => 'P2',
+                                    'P3' => 'P3')))
+            ->add('member', 'entity', array(
+                     'class' => 'LksMemberManagementBundle:Member',
+                     'property' => 'firstname',))
+            ->add('save', 'submit')
+            ->getForm();
+
+         //mamage the response of the form
+        $form->handleRequest($request);
+
+        if($form->isValid())
+        {
+            //@todo : determine the  begin date and the end date
+            //$projectService->planProject($project);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+
+            //TODO : Define a route
+            return $this->redirect($this->generateUrl('lks_project_management_homepage'));
+        }
+        return $this->render('LksProjectManagementBundle:Default:edit.html.twig', array('project' => $project, 'form' => $form->createView()));
+    }
+
     public function deleteAction($projectId)
     {
         $repository = $this->getDoctrine()
