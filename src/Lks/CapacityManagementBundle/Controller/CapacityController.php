@@ -12,10 +12,7 @@ class CapacityController extends Controller
 {
     public function generateAction(Request $request)
     {
-        $projectDao = $this->get('projectDao');
-        $memberDao = $this->get('memberDao');
-        $logger = $this->get('logger');
-        $capacityService = new CapacityService($memberDao, $projectDao, $logger);
+        $capacityService = $this->get('lks_capacity_management.capacity');
 
         $memberAvailibilities = $capacityService->listMembersAvailibilities();
         $members = $capacityService->listMembers();

@@ -54,6 +54,11 @@ class Project
      */
 	protected $member;
 
+    function __construct()
+    {
+        $this->beginDate = new \DateTime('NOW');
+        $this->endDate = new \DateTime('NOW');
+    }
     /**
      * Get id
      *

@@ -25,6 +25,7 @@ class ProjectController extends Controller
             ->add('name', 'text')
             ->add('description', 'textarea')
             ->add('estimation', 'integer')
+            ->add('beginDate', 'date')
             ->add('priority', 'choice', array(
                             'choices' => array('P1' => 'P1', 
                                     'P2' => 'P2',
@@ -81,7 +82,9 @@ class ProjectController extends Controller
             //@todo : determine the  begin date and the end date
             $projectDao = $this->get('projectDao');
             $projectService = new ProjectService($projectDao);
-            $projectService->planProject($project);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($projectService->planProject($project));
+            $em->flush();
 
             //TODO : Define a route
             return $this->redirect($this->generateUrl('lks_project_management_homepage'));

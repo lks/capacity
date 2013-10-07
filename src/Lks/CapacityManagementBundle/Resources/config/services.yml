@@ -1,7 +1,7 @@
 parameters:
-#    lks_capacity_management.example.class: Lks\CapacityManagementBundle\Example
+    lks_capacity_management.capacity.class: Lks\CapacityManagementBundle\Services\CapacityService
 
 services:
-#    lks_capacity_management.example:
-#        class: %lks_capacity_management.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    lks_capacity_management.capacity:
+        class: %lks_capacity_management.capacity.class%
+        arguments: [@memberDao, @projectDao, @logger]

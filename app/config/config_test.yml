@@ -14,3 +14,9 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+atoum:
+    bundles:
+        # note that the full name, including vendor, is required
+        MemberManagementBundle:
+            directories: [Tests/Units]
