@@ -29,11 +29,6 @@ class Member
 	protected $lastname;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    protected $availibilityDate;
-
-    /**
      * @ORM\OneToMany(targetEntity="Lks\ProjectManagementBundle\Entity\Project", mappedBy="member")
      */
     protected $projects;
@@ -104,12 +99,12 @@ class Member
     /**
      * Add projects
      *
-     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
+     * @param \Lks\ProjectManagementBundle\Entity\Project $project
      * @return Member
      */
-    public function addProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
+    public function addProject(\Lks\ProjectManagementBundle\Entity\Project $project)
     {
-        $this->projects[] = $projects;
+        $this->projects[] = $project;
     
         return $this;
     }
@@ -119,9 +114,9 @@ class Member
      *
      * @param \Lks\ProjectManagementBundle\Entity\Project $projects
      */
-    public function removeProject(\Lks\ProjectManagementBundle\Entity\Project $projects)
+    public function removeProject(\Lks\ProjectManagementBundle\Entity\Project $project)
     {
-        $this->projects->removeElement($projects);
+        $this->projects->removeElement($project);
     }
 
     /**
@@ -146,6 +141,7 @@ class Member
         $projectsTh = $this->getProjects();
         foreach($projectsTh as $project)
         {
+            $tmpId = $project->getId();
             $projects[count($projects)] = $project;
         }
 
@@ -154,9 +150,10 @@ class Member
         {
             usort($projects, function($a, $b)
                     {
-                        return $a > $b;
+                        return $a < $b;
                     });
-            $this->availibilityDate = $projects[0];
+            $this->availibilityDate = new \DateTime($projects[0]->getEndDate());
+            $this->availibilityDate->add(new \DateInterval('P01D'));
         }
 
         return $this->availibilityDate;

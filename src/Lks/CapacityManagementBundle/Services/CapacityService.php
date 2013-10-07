@@ -55,6 +55,10 @@ class CapacityService implements ICapacityService
 		return $designs;
 	}
 
+	public function caseToTest($a, $b)
+	{
+	}
+
 	/**
 	 * Create the ProjectDesign Object from the project and the currentDate.
 	 * The percent of the beginning form and the width of the form.

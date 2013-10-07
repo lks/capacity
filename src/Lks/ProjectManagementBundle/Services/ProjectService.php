@@ -20,20 +20,21 @@ class ProjectService
         return $this->projectDao->getProjects(array('member' => null));
 	}
 
-	public function planProject(Project $project)
+	public function planProject($project)
 	{
 		//get next availibility of the member selected
 		$member = $project->getMember();
 
 		//sort the projects list
-		$availibilityDate = $member->getAvailibilityDate();
+		$availibilityDate = $member->getAvailibilityDate($project->getId());
 		
 		//compute the begin date and the end date
 		$project->setBeginDate($availibilityDate);
 		$endTmpDate = clone $availibilityDate;
-		$project->setEndDate($endTmpDate->add(new \DateInterval('P'.$project->getEstimation().'D')));
+		$endTmpInterval = new \DateInterval('P'.$project->getEstimation().'D');
+		$project->setEndDate($endTmpDate->add($endTmpInterval));
 
-		$this->projectDao->save($project);
+		return $project;
 
 	}
 }
