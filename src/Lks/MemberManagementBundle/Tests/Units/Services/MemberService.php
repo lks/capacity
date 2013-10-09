@@ -11,9 +11,16 @@ class MemberService extends Units\Test
 		$this->mockGenerator->generate('MemberDao');
 		$mockMemberDao = new \mock\MemberDao();
 
-		$this->calling($mockMemberDao)->listMembers = null;
+		$this->calling($mockMemberDao)->listMembers = array();
 
-		if($memberService = new \Lks\MemberManagementBundle\Services\MemberService($mockMemberDao))
-
+		$memberService = new \Lks\MemberManagementBundle\Services\MemberService($mockMemberDao);
+		$listMembers = $memberService->listMembers();
+		$this
+			->array($listMembers)
+				->isEmpty()
+			->mock($mockMemberDao)
+        		->call('listMembers')
+            		->once()
+        ;
 	}
 }
