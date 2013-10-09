@@ -195,3 +195,7 @@ app/cache/dev/appDevUrlMatcher.php
 *.sublime-workspace
 
 *.log
+
+vendor/atoum/atoum/
+
+vendor/atoum/atoum-bundle/atoum/AtoumBundle/
