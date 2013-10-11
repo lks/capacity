@@ -23,7 +23,6 @@ class CapacityService implements ICapacityService
 
 	public function listMembersAvailibilities()
 	{
-		$memberService = new MemberService($this->memberDao);
 		return $memberService->listMembers();
 	}
 
@@ -155,5 +154,16 @@ class CapacityService implements ICapacityService
 			$availibilityDate->add(new \DateInterval('P'.$estimation.'D'));
 		}
 		return $availibilityDate;
+	}
+
+	/**
+     * Compute and suggest one or many proposition for the planning of the given project.
+     *
+     *
+     * @return Array of Project object
+     */
+	public function suggestPlanProject($project, $oneSuggestion = false)
+	{
+		return null;
 	}
 }

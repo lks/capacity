@@ -28,4 +28,10 @@ class MemberDao
 
         return $members;
 	}
+
+	public function getMember($id)
+	{
+		$member = $this->repository->find($id);
+        return $member;
+	}
 }

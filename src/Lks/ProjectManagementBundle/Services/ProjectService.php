@@ -6,8 +6,6 @@ use Lks\ProjectManagementBundle\Entity\Project;
 
 class ProjectService
 {
-
-	protected $em;
 	protected $projectDao;
 
     public function __construct($projectDao)
@@ -15,12 +13,27 @@ class ProjectService
         $this->projectDao = $projectDao;
     }
 
-	public function getOpenProjects()
+    /**
+     * list all open projects
+     *
+     * @return Array of Project object
+     */
+	public function listOpenProjects()
 	{
-        return $this->projectDao->getProjects(array('member' => null));
+        return $this->projectDao->listProjects(array('member' => null));
 	}
 
-	public function planProject($project)
+	public function assignProject($projectId, $memberId)
+	{
+		return null;
+	}
+
+	/**
+     * list all open projects
+     *
+     * @return Array of Project object
+     */
+	public function automaticPlanProject($project)
 	{
 		//get next availibility of the member selected
 		$member = $project->getMember();

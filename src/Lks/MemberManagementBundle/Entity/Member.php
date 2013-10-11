@@ -104,7 +104,7 @@ class Member
      */
     public function addProject(\Lks\ProjectManagementBundle\Entity\Project $project)
     {
-        $this->projects[] = $project;
+        $this->projects[count($this->projects)] = $project;
     
         return $this;
     }
