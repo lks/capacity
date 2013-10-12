@@ -18,6 +18,11 @@ class ProjectDao
         $this->repository = $this->em->getRepository('LksProjectManagementBundle:Project');
     }
 
+    public function getProject($id)
+    {
+        return $this->repository->find($id);
+    }
+
 	public function listProjects($params)
 	{
         return $this->repository->findBy($params);

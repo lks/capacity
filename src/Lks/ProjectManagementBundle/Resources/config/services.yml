@@ -4,4 +4,4 @@ parameters:
 services:
     lks_project_management.project:
         class: %lks_project_management.project.class%
-        arguments: [@projectDao]
+        arguments: [@projectDao, @lks_user_management.member]

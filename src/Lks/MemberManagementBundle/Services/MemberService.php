@@ -22,6 +22,11 @@ class MemberService
     	return $this->memberDao->listMembers();
     }
 
+    public function getMember($id)
+    {
+        return $this->memberDao->getMember($id);
+    }
+
     /**
      * Get the next availibility date for a given member
      *
