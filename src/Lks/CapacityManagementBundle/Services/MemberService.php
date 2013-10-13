@@ -10,6 +10,7 @@ class MemberService
     public function __construct($memberDao)
     {
         $this->memberDao = $memberDao;
+
     }
 
     /**
