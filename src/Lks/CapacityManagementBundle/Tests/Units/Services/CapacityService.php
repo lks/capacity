@@ -18,6 +18,12 @@ class CapacityService extends Units\Test
 		$this
 			->array($listCapacities)
 				->isNotEmpty()
+				->hasSize(2)
+			->object($listCapacities[0])
+				->isInstanceOf('Lks\CapacityManagementBundle\Entity\Capacity')
+			->object($listCapacities[0]->getMember())
+				->isInstanceOf('Lks\CapacityManagementBundle\Entity\Member')
+
 		;
 	}
 	

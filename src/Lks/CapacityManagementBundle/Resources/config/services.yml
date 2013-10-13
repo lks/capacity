@@ -1,20 +1,2 @@
 parameters:
     lks_capacity_management.capacity.class: Lks\CapacityManagementBundle\Services\CapacityService
-
-
-services:
-    projectDao:
-        class: Lks\CapacityManagementBundle\Dao\ProjectDao
-        arguments: [@doctrine.orm.entity_manager]
-    memberDao:
-        class: Lks\CapacityManagementBundle\Dao\MemberDao
-        arguments: [@doctrine.orm.entity_manager]
-    projectService:
-        class: Lks\CapacityManagementBundle\Services\ProjectService
-        arguments: [@projectDao, @memberService]
-    memberService:
-        class: Lks\CapacityManagementBundle\Services\MemberService
-        arguments: [@memberDao]
-    capacityService:
-        class: Lks\CapacityManagementBundle\Services\CapacityService
-        arguments: [@memberService, @projectService]

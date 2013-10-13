@@ -2,6 +2,11 @@
 
 namespace Lks\CapacityManagementBundle\Services;
 
+use Lks\CapacityManagementBundle\Entity\Capacity;
+use Lks\CapacityManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\ProjectLight;
+
+
 
 class CapacityService
 {
@@ -23,6 +28,9 @@ class CapacityService
      */
     public function computeCapacityPlanning($suggestion = false, $period = 60)
     {
-    	return null;
+    	$capacity1 = new Capacity();
+    	$capacity1->setMember(new Member());
+    	$capacity2 = new Capacity();
+    	return array($capacity1, new Capacity());
     }
 }

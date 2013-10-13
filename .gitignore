@@ -199,3 +199,5 @@ app/cache/dev/appDevUrlMatcher.php
 vendor/atoum/atoum/
 
 vendor/atoum/atoum-bundle/atoum/AtoumBundle/
+
+app/cache/dev/appDevDebugProjectContainerCompiler.log
