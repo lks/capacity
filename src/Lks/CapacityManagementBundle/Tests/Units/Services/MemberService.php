@@ -1,10 +1,10 @@
 <?php
 
-namespace Lks\MemberManagementBundle\Tests\Units\Services;
+namespace Lks\CapacityManagementBundle\Tests\Units\Services;
 
 use atoum\AtoumBundle\Test\Units;
-use Lks\MemberManagementBundle\Entity\Member;
-use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\Project;
 
 class MemberService extends Units\Test
 {
@@ -18,7 +18,7 @@ class MemberService extends Units\Test
 
 		$this->calling($mockMemberDao)->listMembers = array();
 
-		$memberService = new \Lks\MemberManagementBundle\Services\MemberService($mockMemberDao);
+		$memberService = new \Lks\CapacityManagementBundle\Services\MemberService($mockMemberDao);
 		$listMembers = $memberService->listMembers();
 		$this
 			->array($listMembers)
@@ -38,7 +38,7 @@ class MemberService extends Units\Test
 		$member = $this->createMember(new \DateTime('2013-12-10'), 5);
 		$this->calling($mockMemberDao)->getMember = $member;
 
-		$memberService = new \Lks\MemberManagementBundle\Services\MemberService($mockMemberDao);
+		$memberService = new \Lks\CapacityManagementBundle\Services\MemberService($mockMemberDao);
 
 		$availibilityDate = $memberService->getAvailibilityDateByMember(1);
 		$this

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lks\MemberManagementBundle\Services;
+namespace Lks\CapacityManagementBundle\Services;
 
 class MemberService
 {

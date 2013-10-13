@@ -1,6 +1,6 @@
 <?php
 
-namespace Lks\MemberManagementBundle\Dao;
+namespace Lks\CapacityManagementBundle\Dao;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
@@ -13,7 +13,7 @@ class MemberDao
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->repository = $this->em->getRepository('LksMemberManagementBundle:Member');
+        $this->repository = $this->em->getRepository('LksCapacityManagementBundle:Member');
     }
 
     public function listMembers($params = null)

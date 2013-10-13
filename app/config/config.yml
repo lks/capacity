@@ -66,10 +66,6 @@ swiftmailer:
     spool:     { type: memory }
 
 services:
-    projectDao:
-        class: Lks\ProjectManagementBundle\Dao\ProjectDao
-        arguments: [ @doctrine.orm.entity_manager ]
-    memberDao:
-        class: Lks\MemberManagementBundle\Dao\MemberDao
-        arguments: [ @doctrine.orm.entity_manager ]
+    
+    
 

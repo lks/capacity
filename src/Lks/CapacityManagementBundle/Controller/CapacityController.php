@@ -5,7 +5,7 @@ namespace Lks\CapacityManagementBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Lks\CapacityManagementBundle\Services\CapacityService;
-use Lks\ProjectManagementBundle\Entity\ProjectLight;
+use Lks\CapacityManagementBundle\Entity\ProjectLight;
 use Lks\CapacityManagementBundle\Entity\Capacity;
 
 class CapacityController extends Controller

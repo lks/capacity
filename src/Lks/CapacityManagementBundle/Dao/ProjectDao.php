@@ -1,10 +1,10 @@
 <?php
 
-namespace Lks\ProjectManagementBundle\Dao;
+namespace Lks\CapacityManagementBundle\Dao;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Entity\Project;
 use Doctrine\Common\Collections\Criteria;
 
 class ProjectDao
@@ -15,7 +15,7 @@ class ProjectDao
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->repository = $this->em->getRepository('LksProjectManagementBundle:Project');
+        $this->repository = $this->em->getRepository('LksCapacityManagementBundle:Project');
     }
 
     public function getProject($id)

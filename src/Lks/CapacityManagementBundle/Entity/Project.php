@@ -1,7 +1,7 @@
 <?php
-namespace Lks\ProjectManagementBundle\Entity;
+namespace Lks\CapacityManagementBundle\Entity;
 
-use Lks\MemberManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\Member;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,7 +49,7 @@ class Project
     protected $endDate;
 
 	/**
-     * @ORM\ManyToOne(targetEntity="Lks\MemberManagementBundle\Entity\Member", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="Lks\CapacityManagementBundle\Entity\Member", inversedBy="projects")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
 	protected $member;
@@ -121,7 +121,7 @@ class Project
      * @param \Lks\MemberManagementBundle\Entity\Member $member
      * @return Project
      */
-    public function setMember(\Lks\MemberManagementBundle\Entity\Member $member = null)
+    public function setMember(\Lks\CapacityManagementBundle\Entity\Member $member = null)
     {
         $this->member = $member;
     
@@ -131,7 +131,7 @@ class Project
     /**
      * Get member
      *
-     * @return \Lks\UserManagementBundle\Entity\Member 
+     * @return \Lks\CapacityManagementBundle\Entity\Member 
      */
     public function getMember()
     {

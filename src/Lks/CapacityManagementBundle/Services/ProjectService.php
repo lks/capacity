@@ -1,9 +1,10 @@
 <?php
 
-namespace Lks\ProjectManagementBundle\Services;
+namespace Lks\CapacityManagementBundle\Services;
 
-use Lks\ProjectManagementBundle\Entity\Project;
-use Lks\MemberManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Exception\NotFoundException;
+use Lks\CapacityManagementBundle\Entity\Member;
 
 class ProjectService
 {
@@ -37,6 +38,10 @@ class ProjectService
 	public function assignProject($projectId, $memberId)
 	{
 		$project = $this->projectDao->getProject($projectId);
+		if($project == null)
+		{
+			throw new NotFoundException('Project with '.$projectId.' ID was not found in the database.');
+		}
 		$member = $this->memberService->getMember($memberId);
 		$project->setMember($member);
 
@@ -54,21 +59,21 @@ class ProjectService
      *
      * @return Array of Project object
      */
-	public function automaticPlanProject($project)
-	{
-		//get next availibility of the member selected
-		$member = $project->getMember();
+	// public function automaticPlanProject($project)
+	// {
+	// 	//get next availibility of the member selected
+	// 	$member = $project->getMember();
 
-		//sort the projects list
-		$availibilityDate = $member->getAvailibilityDate($project->getId());
+	// 	//sort the projects list
+	// 	$availibilityDate = $member->getAvailibilityDate($project->getId());
 		
-		//compute the begin date and the end date
-		$project->setBeginDate($availibilityDate);
-		$endTmpDate = clone $availibilityDate;
-		$endTmpInterval = new \DateInterval('P'.$project->getEstimation().'D');
-		$project->setEndDate($endTmpDate->add($endTmpInterval));
+	// 	//compute the begin date and the end date
+	// 	$project->setBeginDate($availibilityDate);
+	// 	$endTmpDate = clone $availibilityDate;
+	// 	$endTmpInterval = new \DateInterval('P'.$project->getEstimation().'D');
+	// 	$project->setEndDate($endTmpDate->add($endTmpInterval));
 
-		return $project;
+	// 	return $project;
 
-	}
+	// }
 }

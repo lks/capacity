@@ -1,10 +1,10 @@
 <?php
 
-namespace Lks\ProjectManagementBundle\Tests\Units\Services;
+namespace Lks\CapacityManagementBundle\Tests\Units\Services;
 
 use atoum\AtoumBundle\Test\Units;
-use Lks\MemberManagementBundle\Entity\Member;
-use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\Project;
 
 class ProjectService extends Units\Test
 {
@@ -21,7 +21,7 @@ class ProjectService extends Units\Test
 
 		$this->calling($mockProjectDao)->listProjects = array();
 
-		$projectService = new \Lks\ProjectManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
+		$projectService = new \Lks\CapacityManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
 		$listProjects = $projectService->listOpenProjects();
 		$this
 			->array($listProjects)
@@ -45,7 +45,7 @@ class ProjectService extends Units\Test
 
         $this->calling($mockProjectDao)->listProjects = array($this->createProject(), $this->createProject());
 
-		$projectService = new \Lks\ProjectManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
+		$projectService = new \Lks\CapacityManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
 		$listProjects = $projectService->listOpenProjects();
 		$this
 			->array($listProjects)
@@ -68,21 +68,41 @@ class ProjectService extends Units\Test
 		$mockMemberService = new \mock\MemberService();
 
         $this->calling($mockProjectDao)->getProject = $this->createProject(2);
-        $memberTmp = $this->createMember('2013-12-10');
-        $this->calling($mockMemberService)->getMember = $memberTmp;
+        $memberTmp = $this->createMember();
+        $this->calling($mockMemberService)->getMember = $this->createMember();
         $this->calling($mockMemberService)->getAvailibilityDateByMember = new \DateTime('2013-12-11');
 
-        $projectService = new \Lks\ProjectManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
+        $projectService = new \Lks\CapacityManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
         $project = $projectService->assignProject(1, 1);
         $this
         	->object($project)
-        		->isInstanceOf('Lks\ProjectManagementBundle\Entity\Project')
+        		->isInstanceOf('Lks\CapacityManagementBundle\Entity\Project')
         	->variable($project->getMember())
         		->isEqualTo($memberTmp)
         	->dateTime($project->getBeginDate())
         		->hasDate('2013', '12', '11')
         	->dateTime($project->getEndDate())
         		->hasDate('2013', '12', '13')
+        ;
+	}
+
+	public function testAssignProjectExceptionNoProject()
+	{
+		$this->mockGenerator->generate('ProjectDao');
+		$mockProjectDao = new \mock\ProjectDao();
+		$this->mockGenerator->generate('MemberService');
+		$mockMemberService = new \mock\MemberService();
+
+		$this->calling($mockProjectDao)->getProject = null;
+		$projectService = new \Lks\CapacityManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
+
+        $this
+        	->exception(
+        			 function() use($projectService) {
+			            $projectService->assignProject(1, 1);
+			        }
+        		)
+        		->isInstanceOf('Lks\CapacityManagementBundle\Exception\NotFoundException')
         ;
 	}
 
@@ -93,12 +113,8 @@ class ProjectService extends Units\Test
 		return $project;
 	}
 
-	private function createMember($endDate)
+	private function createMember()
 	{
-		$member = new Member();
-		$project = new Project();
-		$project->setEndDate(new \DateTime($endDate));
-		$member->addProject($project);
-		return $member;
+		return new Member();
 	}
 }

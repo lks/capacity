@@ -1,8 +1,8 @@
 <?php
 
-namespace Lks\MemberManagementBundle\Tests\Units\Entity;
+namespace Lks\CapacityManagementBundle\Tests\Units\Entity;
  
-use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Entity\Project;
 use atoum\AtoumBundle\Test\Units;
  
 class Member extends Units\Test
@@ -20,7 +20,7 @@ class Member extends Units\Test
         $projects[1] = $project2;
 
         $this
-            ->if($member = new \Lks\MemberManagementBundle\Entity\Member())
+            ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
             ->and($member->addProject($project1))
             ->and($member->addProject($project2))
                 ->dateTime($member->getAvailibilityDate())
@@ -28,7 +28,7 @@ class Member extends Units\Test
         ;
 
         $this
-            ->if($member = new \Lks\MemberManagementBundle\Entity\Member())
+            ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
             ->and($member->addProject($project1))
                 ->dateTime($member->getAvailibilityDate())
                     ->hasDate('2013', '11', '22')
@@ -37,7 +37,7 @@ class Member extends Units\Test
         $currentDate = new \DateTime('NOW');
 
         $this
-            ->if($member = new \Lks\MemberManagementBundle\Entity\Member())
+            ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
                 ->dateTime($member->getAvailibilityDate())
                     ->hasDate($currentDate->format('Y'), $currentDate->format('m'), $currentDate->format('d'))
         ;

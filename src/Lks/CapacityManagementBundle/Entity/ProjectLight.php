@@ -1,6 +1,6 @@
 <?php
 
-namespace Lks\ProjectManagementBundle\Entity;
+namespace Lks\CapacityManagementBundle\Entity;
 
 class ProjectLight
 {

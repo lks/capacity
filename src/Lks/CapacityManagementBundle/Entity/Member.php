@@ -1,7 +1,7 @@
 <?php
-namespace Lks\MemberManagementBundle\Entity;
+namespace Lks\CapacityManagementBundle\Entity;
 
-use Lks\ProjectManagementBundle\Entity\Project;
+use Lks\CapacityManagementBundle\Entity\Project;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +29,7 @@ class Member
 	protected $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity="Lks\ProjectManagementBundle\Entity\Project", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Lks\CapacityManagementBundle\Entity\Project", mappedBy="member")
      */
     protected $projects;
 
@@ -99,10 +99,10 @@ class Member
     /**
      * Add projects
      *
-     * @param \Lks\ProjectManagementBundle\Entity\Project $project
+     * @param \Lks\CapacityManagementBundle\Entity\Project $project
      * @return Member
      */
-    public function addProject(\Lks\ProjectManagementBundle\Entity\Project $project)
+    public function addProject(\Lks\CapacityManagementBundle\Entity\Project $project)
     {
         $this->projects[count($this->projects)] = $project;
     
@@ -112,9 +112,9 @@ class Member
     /**
      * Remove projects
      *
-     * @param \Lks\ProjectManagementBundle\Entity\Project $projects
+     * @param \Lks\CapacityManagementBundle\Entity\Project $projects
      */
-    public function removeProject(\Lks\ProjectManagementBundle\Entity\Project $project)
+    public function removeProject(\Lks\CapacityManagementBundle\Entity\Project $project)
     {
         $this->projects->removeElement($project);
     }

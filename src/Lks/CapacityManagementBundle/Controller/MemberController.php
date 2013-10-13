@@ -1,9 +1,9 @@
 <?php
 
-namespace Lks\MemberManagementBundle\Controller;
+namespace Lks\CapacityManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Lks\MemberManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\Member;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,10 +29,10 @@ class MemberController extends Controller
 		    $em->flush();
 
 		    //TODO : Define a route
-		    return $this->render('LksMemberManagementBundle:Default:yata.html.twig');
+		    return $this->render('LksCapacityManagementBundle:Default:yata.html.twig');
     	}
 
-        return $this->render('LksMemberManagementBundle:Default:index.html.twig', array(
+        return $this->render('LksCapacityManagementBundle:Default:index.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -41,7 +41,7 @@ class MemberController extends Controller
     {
         //get all user items
         $repository = $this->getDoctrine() 
-            ->getRepository('LksMemberManagementBundle:Member');
+            ->getRepository('LksCapacityManagementBundle:Member');
 
         $members = $repository->findAll();
         //begin of the form building
@@ -64,16 +64,16 @@ class MemberController extends Controller
 
             $members = $repository->findAll();
             //TODO : Define a route
-            return $this->render('LksMemberManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
+            return $this->render('LksCapacityManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
         }
         // The security layer will intercept this request
-        return $this->render('LksMemberManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
+        return $this->render('LksCapacityManagementBundle:Default:listUser.html.twig', array('members' => $members, 'form' => $form->createView()));
     }
 
     public function deleteAction($memberId)
     {
         $repository = $this->getDoctrine()
-            ->getRepository('LksMemberManagementBundle:Member');
+            ->getRepository('LksCapacityManagementBundle:Member');
         $member=$repository->find($memberId);
         
         if($member != null)
