@@ -53,8 +53,12 @@ class MemberService
                     {
                         return $a > $b;
                     });
-            $availibilityDate = $projects[0]->getEndDate();
-            $availibilityDate->add(new \DateInterval('P01D'));
+            $diff = $projects[0]->getEndDate()->diff($availibilityDate);
+            if($diff->days > 0 && $diff->invert)
+            {
+                $availibilityDate = $projects[0]->getEndDate();
+                $availibilityDate->add(new \DateInterval('P01D'));
+            }
         }
 
         return $availibilityDate;

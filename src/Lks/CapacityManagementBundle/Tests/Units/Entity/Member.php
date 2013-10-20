@@ -7,7 +7,7 @@ use atoum\AtoumBundle\Test\Units;
  
 class Member extends Units\Test
 {
-    public function testGetAvailibilityDate()
+    public function testSetAvailibilityDate()
     {
         //Project #1 creation
         $project1 = new Project();
@@ -23,14 +23,14 @@ class Member extends Units\Test
             ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
             ->and($member->addProject($project1))
             ->and($member->addProject($project2))
-                ->dateTime($member->getAvailibilityDate())
+                ->dateTime($member->setAvailibilityDate())
                     ->hasDate('2013', '12', '03')
         ;
 
         $this
             ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
             ->and($member->addProject($project1))
-                ->dateTime($member->getAvailibilityDate())
+                ->dateTime($member->setAvailibilityDate())
                     ->hasDate('2013', '11', '22')
         ;
 
@@ -38,7 +38,7 @@ class Member extends Units\Test
 
         $this
             ->if($member = new \Lks\CapacityManagementBundle\Entity\Member())
-                ->dateTime($member->getAvailibilityDate())
+                ->dateTime($member->setAvailibilityDate())
                     ->hasDate($currentDate->format('Y'), $currentDate->format('m'), $currentDate->format('d'))
         ;
     }

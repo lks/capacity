@@ -2,9 +2,3 @@ lks_project_management_homepage:
     pattern:  /projects
     defaults: { _controller: LksProjectManagementBundle:Project:projects }
 
-lks_project_management_delete_project:
-    pattern:  /delete/{projectId}
-    defaults: { _controller: LksProjectManagementBundle:Project:delete }
-lks_project_management_edit_project:
-    pattern:  /edit/{projectId}
-    defaults: { _controller: LksProjectManagementBundle:Project:edit }

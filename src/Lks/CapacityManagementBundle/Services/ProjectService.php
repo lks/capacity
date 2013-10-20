@@ -28,29 +28,29 @@ class ProjectService
 	}
 
 	/**
-	 * Assigne the given member to the given project. This method will get the next availibility date
+	 * Update the given project. This method will get the next availibility date
 	 * of the member and will compute the end date of this project.
 	 * 
-	 * @param Integer Project id
-	 * @param Integer Member id
+	 * @param Project 
 	 * @return Project Object updated
 	 */
-	public function assignProject($projectId, $memberId)
+	public function updateProject($project)
 	{
-		$project = $this->projectDao->getProject($projectId);
-		if($project == null)
+		$member = $project->getMember();
+		if($member != null)
 		{
-			throw new NotFoundException('Project with '.$projectId.' ID was not found in the database.');
+			//compute the end date
+			$availibilityDate = $this->memberService->getAvailibilityDateByMember($member->getId());
+			$diff = $availibilityDate->diff($project->getBeginDate());
+            if(!($diff->days > 0 && $diff->invert))
+            {
+            	$availibilityDate = $project->getBeginDate();
+            }
+			$project->setBeginDate($availibilityDate);
+			$endDate = clone $availibilityDate;
+			$project->setEndDate($endDate->add(new \DateInterval('P'.$project->getEstimation().'D')));
 		}
-		$member = $this->memberService->getMember($memberId);
-		$project->setMember($member);
-
-		//compute the end date
-		$availibilityDate = $this->memberService->getAvailibilityDateByMember($memberId);
-		$project->setBeginDate($availibilityDate);
-		$endDate = clone $availibilityDate;
-		$project->setEndDate($endDate->add(new \DateInterval('P'.$project->getEstimation().'D')));
-
+		$this->projectDao->save($project);
 		return $project;
 	}
 

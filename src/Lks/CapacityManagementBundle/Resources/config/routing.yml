@@ -1,3 +1,19 @@
-lks_capacity_management_homepage:
+lks_capacity:
     pattern:  /generate
     defaults: { _controller: LksCapacityManagementBundle:Capacity:generate }
+lks_members:
+    pattern:  /members
+    defaults: { _controller: LksCapacityManagementBundle:Member:members }
+lks_projects:
+    pattern:  /projects
+    defaults: { _controller: LksCapacityManagementBundle:Project:projects }
+lks_projects_assign:
+    pattern:  /assignProject/{projectId}
+    defaults: { _controller: LksCapacityManagementBundle:Project:assign}
+
+lks_project_management_delete_project:
+    pattern:  /delete/{projectId}
+    defaults: { _controller: LksCapacityManagementBundle:Project:delete }
+lks_project_management_edit_project:
+    pattern:  /edit/{projectId}
+    defaults: { _controller: LksCapacityManagementBundle:Project:edit }

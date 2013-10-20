@@ -33,6 +33,8 @@ class Member
      */
     protected $projects;
 
+    protected $availibilityDate;
+
     /**
      * Get id
      *
@@ -129,12 +131,17 @@ class Member
         return $this->projects;
     }
 
+    public function getAvailibilityDate()
+    {
+        return $this->availibilityDate;
+    }
+
     /**
      * Get availibilityDate
      *
      * @return \DateTime 
      */
-    public function getAvailibilityDate()
+    public function setAvailibilityDate()
     {
         //@todo : sort the projects list
         $projects = array();
@@ -152,8 +159,14 @@ class Member
                     {
                         return $a < $b;
                     });
-            $this->availibilityDate = new \DateTime($projects[0]->getEndDate());
-            $this->availibilityDate->add(new \DateInterval('P01D'));
+
+            $diff = $projects[0]->getEndDate()->diff($this->availibilityDate);
+            if($diff->days > 0 && $diff->invert)
+            {
+                $this->availibilityDate = $projects[0]->getEndDate();
+                $this->availibilityDate->add(new \DateInterval('P01D'));
+            }
+            
         }
 
         return $this->availibilityDate;
