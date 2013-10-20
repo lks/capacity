@@ -7,6 +7,14 @@
 		<li>{{ member.firstname|e }} : {{ member.availibilityDate|date("d/m/Y") }}</li>
 	{% endfor %}
 	</ul>
+	<h2>Project listing</h2>
+	<ul>
+	{% for project in projects %}
+		<li><div>{{ project.name|e }} : {{ project.beginDate|date("d/m/Y") }}</div>
+			<div><a href="assignProject/{{project.id|e}}">Assign to a member</a></div>
+		</li>
+	{% endfor %}
+	</ul>
 	<h2>Capacity Planning</h2>
 	{% for item in capacities %}
 		<h3>{{ item.member.firstname|e }}</h3>

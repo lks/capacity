@@ -5,6 +5,7 @@ namespace Lks\CapacityManagementBundle\Services;
 use Lks\CapacityManagementBundle\Entity\Capacity;
 use Lks\CapacityManagementBundle\Entity\Member;
 use Lks\CapacityManagementBundle\Entity\ProjectLight;
+use Lks\CapacityManagementBundle\Entity\Project;
 
 
 
@@ -28,9 +29,33 @@ class CapacityService
      */
     public function computeCapacityPlanning($suggestion = false, $period = 60)
     {
-    	$capacity1 = new Capacity();
-    	$capacity1->setMember(new Member());
+    	// List of members
+    	$listMembers = $memberService->listMembers();
+
+    	// Create the capacity objects
+    	$capacities = array();
+    	foreach($listMembers as $member)
+    	{
+    		$capacity = new Capacity();
+	    	$capacity->setMember($member);
+	    	
+	    	// Compute for each project the percent of availibility
+	    	$projects = $member->getProjects();
+	    	foreach($projects as $project)
+	    	{
+	    		
+	    	}
+    	}
+
+
+    	$project = new Project();
+    	$project->setName('Test');
+    	$project->setBeginDate(new \DateTime('NOW'));
+    	$capacity1->addProject(new ProjectLight($project, new \DateTime('NOW')));
     	$capacity2 = new Capacity();
     	return array($capacity1, new Capacity());
     }
+
+    protected function convertDateToPercent()
+    {}
 }

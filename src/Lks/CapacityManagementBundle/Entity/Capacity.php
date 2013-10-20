@@ -2,8 +2,8 @@
 
 namespace Lks\CapacityManagementBundle\Entity;
 
-use Lks\MemberManagementBundle\Entity\Member;
-use Lks\ProjectManagementBundle\Entity\ProjectLight;
+use Lks\CapacityManagementBundle\Entity\Member;
+use Lks\CapacityManagementBundle\Entity\ProjectLight;
 
 class Capacity
 {
@@ -31,9 +31,9 @@ class Capacity
 	}
 
 	/**
-     * Get member
+     * Get Project
      *
-     * @return Member 
+     * @return Array of ProjectLight 
      */
 	public function getProjects()
 	{

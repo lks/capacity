@@ -14,9 +14,10 @@ class ProjectLight
 	 */
 	function __construct($project, $currentDate, $period = 60)
 	{
-		if($project != null)
+		if(isset($project) && $project != null)
 		{
-			$periodEndDate = (new \DateTime('NOW'))->add(new \DateInterval('P'.$period.'D'));
+			$periodEndDate = new \DateTime('NOW');
+            $periodEndDate->add(new \DateInterval('P'.$period.'D'));
 			$this->name = $project->getName();
 			$projectBeginDate = $currentDate;
 			if($project->getBeginDate() > $currentDate) 

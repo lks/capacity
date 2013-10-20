@@ -12,15 +12,15 @@ class CapacityController extends Controller
 {
     public function generateAction(Request $request)
     {
-        $capacityService = $this->get('lks_capacity_management.capacity');
+        $memberService = $this->get('memberService');
+        $members = $memberService->listMembers();
 
-        $memberAvailibilities = $capacityService->listMembersAvailibilities();
-        $members = $capacityService->listMembers();
-
+        // Compute the capacity planning
         $capacities = array();
         foreach($members as $member)
         {
             $cap = new Capacity();
+            $member->setAvailibilityDate();
             $cap->setMember($member);
             foreach($member->getProjects() as $project)
             {
@@ -29,10 +29,15 @@ class CapacityController extends Controller
             $capacities[count($capacities)] = $cap;
         }
 
+        // Get the list of the open projects
+        $projectService = $this->get('projectService');
+        $projects = $projectService->listOpenProjects();
+
         return $this->render('LksCapacityManagementBundle:Default:index.html.twig', 
             array(
                 'members' => $members,
                 'capacities' => $capacities,
+                'projects' => $projects,
                 ));
     }
 }
