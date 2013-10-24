@@ -14,7 +14,8 @@ class ProjectLight
 	 */
 	function __construct($project, $currentDate, $period = 60)
 	{
-		if(isset($project) && $project != null)
+        $endDate = $project->getEndDate();
+		if(isset($project) && $project != null && $endDate > $currentDate)
 		{
 			$periodEndDate = new \DateTime('NOW');
             $periodEndDate->add(new \DateInterval('P'.$period.'D'));
@@ -28,8 +29,6 @@ class ProjectLight
 			$durationDay = $project->getEndDate()->diff($projectBeginDate)->days;
 			$startDelayDay = $periodEndDate->diff($projectBeginDate)->days;
 			$this->duration = $this->computePercent($durationDay, $period);
-
-			//$this->startDelay =  $this->computePercent($startDelayDay, $period);
 		}
 	}
 	 /**
