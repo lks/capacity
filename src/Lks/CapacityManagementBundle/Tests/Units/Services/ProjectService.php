@@ -67,13 +67,15 @@ class ProjectService extends Units\Test
 		$this->mockGenerator->generate('MemberService');
 		$mockMemberService = new \mock\MemberService();
 
-        $this->calling($mockProjectDao)->getProject = $this->createProject(2);
-        $memberTmp = $this->createMember();
-        $this->calling($mockMemberService)->getMember = $this->createMember();
+		$memberTmp = $this->createMember();
+		$projectTmp = $this->createProject(2);
+        $this->calling($mockProjectDao)->getProject = $projectTmp;
+        $this->calling($mockMemberService)->getMember = $memberTmp;
         $this->calling($mockMemberService)->getAvailibilityDateByMember = new \DateTime('2013-12-11');
 
         $projectService = new \Lks\CapacityManagementBundle\Services\ProjectService($mockProjectDao, $mockMemberService);
-        $project = $projectService->assignProject(1, 1);
+        $projectTmp->setMember($memberTmp);
+        $project = $projectService->updateProject($projectTmp);
         $this
         	->object($project)
         		->isInstanceOf('Lks\CapacityManagementBundle\Entity\Project')
@@ -99,7 +101,7 @@ class ProjectService extends Units\Test
         $this
         	->exception(
         			 function() use($projectService) {
-			            $projectService->assignProject(1, 1);
+			            $projectService->updateProject(null);
 			        }
         		)
         		->isInstanceOf('Lks\CapacityManagementBundle\Exception\NotFoundException')

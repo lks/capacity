@@ -36,6 +36,10 @@ class ProjectService
 	 */
 	public function updateProject($project)
 	{
+		if($project == null)
+		{
+			throw new NotFoundException('Project is null');
+		}
 		$member = $project->getMember();
 		if($member != null)
 		{

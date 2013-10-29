@@ -11,9 +11,9 @@ class Member extends Units\Test
     {
         //Project #1 creation
         $project1 = new Project();
-        $project1->setEndDate('2013-11-21');
+        $project1->setEndDate(new \DateTime('2013-11-21'));
         $project2 = new Project();
-        $project2->setEndDate('2013-12-02');
+        $project2->setEndDate(new \DateTime('2013-12-02'));
 
         $projects = array();
         $projects[0] = $project1;
