@@ -31,6 +31,9 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Doctrine\\Bundle\\DoctrineBundle' => array($vendorDir . '/doctrine/doctrine-bundle'),
+    'Behat\\Symfony2Extension' => array($vendorDir . '/behat/symfony2-extension/src'),
+    'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
+    'Behat\\Behat' => array($vendorDir . '/behat/behat/src'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
     '' => array($baseDir . '/src'),
 );

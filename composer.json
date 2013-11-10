@@ -37,7 +37,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin/"
     },
     "minimum-stability": "stable",
     "extra": {
@@ -52,6 +52,7 @@
     }, 
     "require-dev": {
         "atoum/atoum": "dev-master",
-        "atoum/atoum-bundle": "dev-master"
+        "atoum/atoum-bundle": "dev-master",
+        "behat/symfony2-extension": "*@dev"
     }
 }

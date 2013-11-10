@@ -28,7 +28,8 @@ class ProjectLight
 
 			$durationDay = $project->getEndDate()->diff($projectBeginDate)->days;
 			$startDelayDay = $periodEndDate->diff($projectBeginDate)->days;
-			$this->duration = $this->computePercent($durationDay, $period);
+            $this->duration = $this->computePercent($durationDay, $period);
+			$this->startDelay = $this->computePercent($startDelayDay, $period);
 		}
 	}
 	 /**
