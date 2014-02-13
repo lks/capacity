@@ -60,7 +60,7 @@ class ProjectService extends Units\Test
 	 * assignProject method test for the use case 1:
 	 * Assign a member to this project with a begin date at 2013-12-11 and an end date at 2013-12-13
 	 */
-	public function testAssignProjectCase1()
+	public function testUpdateProjectCase1()
 	{
 		$this->mockGenerator->generate('ProjectDao');
 		$mockProjectDao = new \mock\ProjectDao();
@@ -88,7 +88,7 @@ class ProjectService extends Units\Test
         ;
 	}
 
-	public function testAssignProjectExceptionNoProject()
+	public function testUpdateProjectExceptionNoProject()
 	{
 		$this->mockGenerator->generate('ProjectDao');
 		$mockProjectDao = new \mock\ProjectDao();
@@ -106,6 +106,14 @@ class ProjectService extends Units\Test
         		)
         		->isInstanceOf('Lks\CapacityManagementBundle\Exception\NotFoundException')
         ;
+	}
+
+
+	public function testListAssignedProjects()
+	{
+		$mockProjectDao = new \mock\ProjectDao();
+		
+
 	}
 
 	private function createProject($estimation = 5)

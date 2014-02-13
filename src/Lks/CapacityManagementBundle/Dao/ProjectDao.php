@@ -28,6 +28,11 @@ class ProjectDao
         return $this->repository->findBy($params);
 	}
 
+    public function listDoneProjects()
+    {
+        return null;
+    }
+
     public function save($project)
     {
         $this->em->persist($project);

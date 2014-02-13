@@ -28,6 +28,26 @@ class ProjectService
 	}
 
 	/**
+     * list all assigned and opened or in progress projects
+     *
+     * @return Array of Project object
+     */
+	public function listAssignedProjects()
+	{
+        return null;
+	}
+
+	/**
+     * list all done projects
+     *
+     * @return Array of Project object
+     */
+	public function listDoneProjects()
+	{
+        return null;
+	}
+
+	/**
 	 * Update the given project. This method will get the next availibility date
 	 * of the member and will compute the end date of this project.
 	 * 
@@ -57,27 +77,4 @@ class ProjectService
 		$this->projectDao->save($project);
 		return $project;
 	}
-
-	/**
-     * list all open projects
-     *
-     * @return Array of Project object
-     */
-	// public function automaticPlanProject($project)
-	// {
-	// 	//get next availibility of the member selected
-	// 	$member = $project->getMember();
-
-	// 	//sort the projects list
-	// 	$availibilityDate = $member->getAvailibilityDate($project->getId());
-		
-	// 	//compute the begin date and the end date
-	// 	$project->setBeginDate($availibilityDate);
-	// 	$endTmpDate = clone $availibilityDate;
-	// 	$endTmpInterval = new \DateInterval('P'.$project->getEstimation().'D');
-	// 	$project->setEndDate($endTmpDate->add($endTmpInterval));
-
-	// 	return $project;
-
-	// }
 }

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Lks\MemberManagementBundle\LksMemberManagementBundle(),
             new Lks\ProjectManagementBundle\LksProjectManagementBundle(),
             new Lks\CapacityManagementBundle\LksCapacityManagementBundle(),
+            new Lks\ManPowerBundle\LksManPowerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
