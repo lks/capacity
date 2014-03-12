@@ -2,11 +2,13 @@
 
 namespace Faker\ORM\Doctrine;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Faker\ORM\Doctrine\ColumnTypeGuesser;
 
 /**
- * Service class for populating a table through a Propel ActiveRecord class.
+ * Service class for populating a table through a Doctrine Entity class.
  */
 class EntityPopulator
 {
@@ -74,7 +76,6 @@ class EntityPopulator
     public function guessColumnFormatters(\Faker\Generator $generator)
     {
         $formatters = array();
-        $class = $this->class;
         $nameGuesser = new \Faker\Guesser\Name($generator);
         $columnTypeGuesser = new ColumnTypeGuesser($generator);
         foreach ($this->class->getFieldNames() AS $fieldName) {
@@ -114,9 +115,10 @@ class EntityPopulator
             $formatters[$assocName] = function($inserted) use ($relatedClass, &$index, $unique) {
                 if ($unique && isset($inserted[$relatedClass])) {
                     return $inserted[$relatedClass][$index++];
-                } else if (isset($inserted[$relatedClass])) {
+                } elseif (isset($inserted[$relatedClass])) {
                     return $inserted[$relatedClass][mt_rand(0, count($inserted[$relatedClass]) - 1)];
                 }
+
                 return null;
             };
         }
@@ -127,7 +129,7 @@ class EntityPopulator
     /**
      * Insert one new record using the Entity class.
      */
-    public function execute($manager, $insertedEntities, $generateId = false)
+    public function execute(ObjectManager $manager, $insertedEntities, $generateId = false)
     {
         $obj = $this->class->newInstance();
 
@@ -164,7 +166,7 @@ class EntityPopulator
         }
     }
 
-    private function generateId($obj, $column, $manager)
+    private function generateId($obj, $column, EntityManagerInterface $manager)
     {
         /* @var $repository \Doctrine\ORM\EntityRepository */
         $repository = $manager->getRepository(get_class($obj));
@@ -177,7 +179,7 @@ class EntityPopulator
         $id = null;
         do {
             $id = rand();
-        } while(in_array($id, $ids));
+        } while (in_array($id, $ids));
 
         return $id;
     }

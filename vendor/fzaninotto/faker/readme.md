@@ -1,10 +1,12 @@
-# Faker [![Build Status](https://secure.travis-ci.org/fzaninotto/Faker.png)](http://travis-ci.org/fzaninotto/Faker)#
+# Faker #
 
 Faker is a PHP library that generates fake data for you. Whether you need to bootstrap your database, create good-looking XML documents, fill-in your persistence to stress test it, or anonymize data taken from a production service, Faker is for you.
 
 Faker is heavily inspired by Perl's [Data::Faker](http://search.cpan.org/~jasonk/Data-Faker-0.07/), and by ruby's [Faker](http://faker.rubyforge.org/).
 
 Faker requires PHP >= 5.3.3.
+
+[![Build Status](https://secure.travis-ci.org/fzaninotto/Faker.png)](http://travis-ci.org/fzaninotto/Faker) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/eceb78a9-38d4-4ad5-8b6b-b52f323e3549/mini.png)](https://insight.sensiolabs.com/projects/eceb78a9-38d4-4ad5-8b6b-b52f323e3549)
 
 ## Basic Usage
 
@@ -97,6 +99,14 @@ Each of the generator properties (like `name`, `address`, and `lorem`) are calle
     company                 // 'Bogan-Treutel'
     companySuffix           // 'and Sons'
 
+### `Faker\Provider\Payment`
+
+    creditCardType          // 'MasterCard'
+    creditCardNumber        // '4485480221084675'
+    creditCardExpirationDate // 04/13
+    creditCardExpirationDateString // '04/13'
+    creditCardDetails       // array('MasterCard', '4485480221084675', 'Aleksander Nowak', '04/13')
+
 ### `Faker\Provider\Lorem`
 
     word                    // 'aut'
@@ -186,6 +196,79 @@ Each of the generator properties (like `name`, `address`, and `lorem`) are calle
     fileExtension          // 'avi'
     mimeType               // 'video/x-msvideo'
 
+### `Faker\Provider\Color`
+
+    hexcolor               // '#fa3cc2'
+    rgbcolor               // '0,255,122'
+    rgbColorAsArray        // array(0,255,122)
+    rgbCssColor            // 'rgb(0,255,122)'
+    safeColorName          // 'fuchsia'
+    colorName              // 'Gainsbor'
+
+### `Faker\Provider\Image`
+
+    /**
+     * Image generation provided by LoremPixel (http://lorempixel.com/)
+     *
+     * @param $dir An absolute path to a local directory
+     * @param $width/$height Size (in pixel) of the generated image (defaults to 640x480)
+     * @param $category One of 'abstract','animals','business','cats','city','food','nightlife','fashion','people','nature','sports','technics', and 'transport'
+     */
+    image($dir)                  // '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.jpg'
+    image($dir, $width, $height) // '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.jpg'
+    image($dir, $width, $height, $category) // '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.jpg'
+    imageUrl                    // 'http://lorempixel.com/640/480/'
+    imageUrl($width, $height)   // 'http://lorempixel.com/800/600/'
+    imageUrl($width, $height, $category) // 'http://lorempixel.com/800/600/person/'
+
+### `Faker\Provider\Payment`
+
+    creditCardType         // 'MasterCard'
+    creditCardNumber($type = null) // '4485480221084675'
+    creditCardExpirationDate($valid = true) // DateTime('2014-10-23 13:46:23')
+    creditCardExpirationDateString($valid = true) // '10/14'
+
+## Unique and Optional modifiers
+
+Faker provides two special providers, `unique()` and `optional()`, to be called before any provider. `optional()` can be useful for seeding non-required fields, like a mobile telephone number ; `unique()` is required to populate fields that cannot accept twice the same value, like primary identifiers.
+
+```php
+// unique() forces providers to return unique values
+$values = array();
+for ($i=0; $i < 10; $i++) {
+  // get a random digit, but always a new one, to avoid duplicates
+  $values []= $faker->unique()->randomDigit;
+}
+print_r($values); // [4, 1, 8, 5, 0, 2, 6, 9, 7, 3]
+
+// providers with a limited range will throw an exception when no new unique value can be generated
+$values = array();
+try {
+  for ($i=0; $i < 10; $i++) {
+    $values []= $faker->unique()->randomDigitNotNull;
+  }
+} catch (\OverflowException $e) {
+  echo "There are only 9 unique digits not null, Faker can't generate 10 of them!";
+}
+
+// you can reset the unique modifier for all providers by passing true as first argument
+$faker->unique($reset = true)->randomDigitNotNull; // will not throw OverflowException since unique() was reset
+// tip: unique() keeps one array of values per provider 
+
+// optional() sometimes bypasses the provider to return null instead
+$values = array();
+for ($i=0; $i < 10; $i++) {
+  // get a random digit, but also null sometimes
+  $values []= $faker->optional()->randomDigit;
+}
+print_r($values); // [1, 4, null, 9, 5, null, null, 4, 6, null]
+
+// optional takes a weight argument to make the null occurrence impossible (value 0) or systematic (value 1)
+$faker->optional($weight = 0.1)->randomDigit; // 10% chance to get null
+$faker->optional($weight = 0.9)->randomDigit; // 90% chance to get null
+// the default $weight value is 0.5
+```
+
 ## Localization
 
 `Faker\Factory` can take a locale as an argument, to return localized data. If no localized provider is found, the factory fallbacks to the default locale (en_EN).
@@ -227,7 +310,7 @@ $populator->addEntity('Book', 10);
 $insertedPKs = $populator->execute();
 ```
 
-The populator uses name and column type guessers to populate each column with relevant data. For instance, Faker populates a column named `first_name` using the `firstName` formatter, and a column with a `TIMESTAMP` type using the `dateTime` formatter. The resulting entities are therefore coherent. If Faker misinterprets a column name, you can still specify a custom clusure to be used for populating a particular column, using the third argument to `addEntity()`:
+The populator uses name and column type guessers to populate each column with relevant data. For instance, Faker populates a column named `first_name` using the `firstName` formatter, and a column with a `TIMESTAMP` type using the `dateTime` formatter. The resulting entities are therefore coherent. If Faker misinterprets a column name, you can still specify a custom closure to be used for populating a particular column, using the third argument to `addEntity()`:
 
 ```php
 <?php
@@ -289,7 +372,7 @@ A `Faker\Generator` alone can't do much generation. It needs `Faker\Provider` ob
 ```php
 <?php
 $faker = new Faker\Generator();
-$faker->addProvider(new Faker\Provider\en_US\Name($faker));
+$faker->addProvider(new Faker\Provider\en_US\Person($faker));
 $faker->addProvider(new Faker\Provider\en_US\Address($faker));
 $faker->addProvider(new Faker\Provider\en_US\PhoneNumber($faker));
 $faker->addProvider(new Faker\Provider\en_US\Company($faker));
@@ -297,9 +380,9 @@ $faker->addProvider(new Faker\Provider\Lorem($faker));
 $faker->addProvider(new Faker\Provider\Internet($faker));
 ````
 
-Whenever you try to access a property on the `$faker` object, the generator looks for a method with the same name in all the providers attached to it. For instance, calling `$faker->name` triggers a call to `Faker\Provider\Name::name()`. And since Faker starts with the last provider, you can easily override existing formatters: just add a provider containing methods named after the formatters you want to override.
+Whenever you try to access a property on the `$faker` object, the generator looks for a method with the same name in all the providers attached to it. For instance, calling `$faker->name` triggers a call to `Faker\Provider\Person::name()`. And since Faker starts with the last provider, you can easily override existing formatters: just add a provider containing methods named after the formatters you want to override.
 
-That means that you can esily add your own providers to a `Faker\Generator` instance. A provider is usually a class extending `\Faker\Provider\Base`. This parent class allows you to use methods like `lexify()` or `randomNumber()`; it also gives you access to formatters of other providers, through the protected `$generator` property. The new formatters are the public methods of the provider class.
+That means that you can easily add your own providers to a `Faker\Generator` instance. A provider is usually a class extending `\Faker\Provider\Base`. This parent class allows you to use methods like `lexify()` or `randomNumber()`; it also gives you access to formatters of other providers, through the protected `$generator` property. The new formatters are the public methods of the provider class.
 
 Here is an example provider for populating Book data:
 
@@ -614,6 +697,43 @@ echo $faker->p; // "5398237590"
 
 ```
 
+### `Faker\Provider\pl_PL\Person`
+
+```php
+<?php
+
+// Generates a random PESEL number
+echo $faker->pesel; // "40061451555"
+// Generates a random personal identity card number
+echo $faker->personalIdentityNumber; // "AKX383360"
+// Generates a random taxpayer identification number (NIP)
+echo $faker->taxpayerIdentificationNumber; // '8211575109'
+
+```
+
+### `Faker\Provider\pl_PL\Company`
+
+```php
+<?php
+
+// Generates a random REGON number
+echo $faker->regon; // "714676680"
+// Generates a random local REGON number
+echo $faker->regonLocal; // "15346111382836"
+
+```
+
+### `Faker\Provider\pl_PL\Payment`
+
+```php
+<?php
+
+// Generates a random bank name
+echo $faker->bank; // "Narodowy Bank Polski"
+// Generates a random bank account number
+echo $faker->bankAccountNumber; // "PL14968907563953822118075816"
+
+```
 
 ## License
 

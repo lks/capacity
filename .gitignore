@@ -196,8 +196,6 @@ app/cache/dev/appDevUrlMatcher.php
 
 *.log
 
-vendor/atoum/atoum/
+vendor
 
-vendor/atoum/atoum-bundle/atoum/AtoumBundle/
-
-app/cache/dev/appDevDebugProjectContainerCompiler.log
+composer.lock

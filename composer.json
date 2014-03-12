@@ -9,6 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
+        "fabpot/goutte": "*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
@@ -18,7 +19,12 @@
         "sensio/distribution-bundle": "2.3.*",
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "behat/symfony2-extension": "*",
+        "behat/mink-extension": "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver":"*@stable"
     },
     "scripts": {
         "post-install-cmd": [

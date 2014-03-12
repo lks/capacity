@@ -4,7 +4,7 @@ default:
             paths: false
     extensions:
         Behat\Symfony2Extension\Extension:
-            bundle: 'CapacityManagementBundlde'
+            bundle: 'BehatSf2DemoBundle'
 
 simple:
     filters:

@@ -6,7 +6,7 @@ class Person extends \Faker\Provider\Person
 {
     protected static $formats = array(
         '{{firstName}} {{middleName}} {{lastName}}',
-        '{{lastName}} {{firstName}} {{lastName}}',
+        '{{lastName}} {{firstName}} {{middleName}}',
     );
 
     /**
@@ -34,7 +34,7 @@ class Person extends \Faker\Provider\Person
     protected static $middleName = array(
         'Александрович', 'Алексеевич', 'Андреевич', 'Дмитриевич', 'Евгеньевич',
         'Сергеевич', 'Иванович', 'Фёдорович', 'Львович', 'Романович', 'Владимирович',
-		'Борисович', 'Максимович',
+        'Борисович', 'Максимович',
     );
 
     /**

@@ -3,6 +3,8 @@
 namespace Faker\Provider;
 
 use Faker\Generator;
+use Faker\NullGenerator;
+use Faker\UniqueGenerator;
 
 class Base
 {
@@ -10,6 +12,11 @@ class Base
      * @var \Faker\Generator
      */
     protected $generator;
+
+    /**
+     * @var \Faker\UniqueGenerator
+     */
+    protected $unique;
 
     /**
      * @param \Faker\Generator $generator
@@ -65,12 +72,12 @@ class Base
 
     /**
      * Return a random float number
-     * 
-     * @param int $nbMaxDecimals
+     *
+     * @param int       $nbMaxDecimals
      * @param int|float $min
      * @param int|float $max
      * @example 48.8932
-     * 
+     *
      * @return float
      */
     public static function randomFloat($nbMaxDecimals = null, $min = 0, $max = null)
@@ -78,20 +85,20 @@ class Base
         if (null === $nbMaxDecimals) {
             $nbMaxDecimals = static::randomDigit();
         }
-        
+
         if (null === $max) {
             $max = static::randomNumber();
         }
-        
+
         if ($min > $max) {
             $tmp = $min;
             $min = $max;
             $max = $tmp;
         }
-        
+
         return round($min + mt_rand() / mt_getrandmax() * ($max - $min), $nbMaxDecimals);
     }
-    
+
     /**
      * Returns a random number between $from and $to
      *
@@ -124,7 +131,24 @@ class Base
      */
     public static function randomElement($array = array('a', 'b', 'c'))
     {
-        return $array[mt_rand(0, count($array) - 1)];
+        return $array ? $array[self::randomKey($array)] : null;
+    }
+
+    /**
+     * Returns a random key from a passed associative array
+     *
+     * @param  array $array
+     * @return mixed
+     */
+    public static function randomKey($array = array())
+    {
+        if (!$array) {
+            return null;
+        }
+        $keys = array_keys($array);
+        $key = $keys[mt_rand(0, count($keys) - 1)];
+
+        return $key;
     }
 
     /**
@@ -184,5 +208,44 @@ class Base
     public static function toUpper($string = '')
     {
         return extension_loaded('mbstring') ? mb_strtoupper($string, 'UTF-8') : strtoupper($string);
+    }
+
+    /**
+     * Chainable method for making any formatter optional
+     * @param float $weight Set the percentage that the formatter is empty.
+     *                      "0" would always return null, "1" would always return the formatter
+     * @return mixed|null
+     */
+    public function optional($weight = 0.5)
+    {
+        if (mt_rand() / mt_getrandmax() <= $weight) {
+            return $this->generator;
+        }
+
+        return new NullGenerator();
+    }
+
+    /**
+     * Chainable method for making any formatter unique.
+     *
+     * <code>
+     * // will never return twice the same value
+     * $faker->unique()->randomElement(array(1, 2, 3));
+     * </code>
+     *
+     * @param boolean $reset      If set to true, resets the list of existing values
+     * @param integer $maxRetries Maximum number of retries to find a unique value,
+     *                            After which an OverflowExcption is thrown.
+     * @throws OverflowException When no unique value can be found by iterating $maxRetries times
+     *
+     * @return UniqueGenerator A proxy class returning only non-existing values
+     */
+    public function unique($reset = false, $maxRetries = 10000)
+    {
+        if ($reset || !$this->unique) {
+            $this->unique = new UniqueGenerator($this->generator, $maxRetries);
+        }
+
+        return $this->unique;
     }
 }

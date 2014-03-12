@@ -47,6 +47,18 @@ class JUnitFormatter extends ConsoleFormatter
      */
     protected $stepsCount = 0;
     /**
+     * Total scenarios count.
+     *
+     * @var integer
+     */
+    protected $scenariosCount = 0;
+    /**
+     * Total scenarios count.
+     *
+     * @var integer
+     */
+    protected $scenarioStepsCount = 0;
+    /**
      * Total exceptions count.
      *
      * @var integer
@@ -129,7 +141,12 @@ class JUnitFormatter extends ConsoleFormatter
     public function beforeFeature(FeatureEvent $event)
     {
         $feature = $event->getFeature();
-        $this->filename = 'TEST-' . basename($feature->getFile(), '.feature') . '.xml';
+        $replace = array(
+            $this->getParameter('features_path') => '',
+            DIRECTORY_SEPARATOR => '-',
+            '.feature' => '.xml'
+        );
+        $this->filename = 'TEST' . strtr($feature->getFile(), $replace);
 
         $this->printTestSuiteHeader($feature);
 
@@ -163,6 +180,7 @@ class JUnitFormatter extends ConsoleFormatter
     public function beforeScenario(ScenarioEvent $event)
     {
         $this->scenarioStartTime = microtime(true);
+        $this->scenarioStepsCount = 0;
     }
 
     /**
@@ -175,6 +193,8 @@ class JUnitFormatter extends ConsoleFormatter
     public function afterScenario(ScenarioEvent $event)
     {
         $this->printTestCase($event->getScenario(), microtime(true) - $this->scenarioStartTime, $event);
+
+        ++$this->scenariosCount;
     }
 
     /**
@@ -207,16 +227,19 @@ class JUnitFormatter extends ConsoleFormatter
     public function afterStep(StepEvent $event)
     {
         if ($event->hasException()) {
-            $this->exceptions[] = $event->getException();
-            $this->exceptionsCount++;
-            if ($event->getResult() === StepEvent::SKIPPED || $event->getResult() === StepEvent::PENDING) {
+            if ($event->getResult() === StepEvent::SKIPPED
+             || $event->getResult() === StepEvent::PENDING
+             || $event->getResult() === StepEvent::UNDEFINED) {
                 $this->pendingCount++;
             } else {
+                $this->exceptions[] = $event->getException();
+                $this->exceptionsCount++;
                 $this->failureCount++;
             }
         }
 
         ++$this->stepsCount;
+        ++$this->scenarioStepsCount;
     }
 
     /**
@@ -238,10 +261,10 @@ class JUnitFormatter extends ConsoleFormatter
     protected function printTestSuiteFooter(FeatureNode $feature, $time)
     {
         $suiteStats = sprintf('errors="0" failures="%d" skipped="%d" name="%s" tests="%d" time="%F"',
-            $this->failureCount,
+            $this->exceptionsCount,
             $this->pendingCount,
             htmlspecialchars($feature->getTitle()),
-            $this->stepsCount,
+            $this->scenariosCount,
             $time
         );
 
@@ -259,15 +282,16 @@ class JUnitFormatter extends ConsoleFormatter
      */
     protected function printTestCase(ScenarioNode $scenario, $time, EventInterface $event)
     {
-        $className  = $scenario->getFeature()->getTitle();
-        $name       = $scenario->getTitle();
-        $name      .= $event instanceof OutlineExampleEvent
-                    ? ', Ex #' . ($event->getIteration() + 1)
-                    : '';
-        $caseStats  = sprintf('classname="%s" name="%s" time="%F"',
+        $className = $scenario->getFeature()->getTitle();
+        $name = $scenario->getTitle();
+        $name .= $event instanceof OutlineExampleEvent
+            ? ', Ex #' . ($event->getIteration() + 1)
+            : '';
+        $caseStats = sprintf('classname="%s" name="%s" time="%F" assertions="%d"',
             htmlspecialchars($className),
             htmlspecialchars($name),
-            $time
+            $time,
+            $this->scenarioStepsCount
         );
 
         $xml  = "    <testcase $caseStats>\n";
